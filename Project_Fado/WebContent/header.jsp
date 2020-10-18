@@ -8,20 +8,21 @@
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <script src="https://kit.fontawesome.com/64de5f242b.js" crossorigin="64de5f242b"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <title>fado</title>
 </head>
 <style>
-a:hover {
-	text-decoration: none;
+a{
+	color:black;
 }
-
 .above {
 	width: 960px;
 	height: 50px;
 	padding-top: 15px;
 	padding-bottom: 5px;
 	text-align: right;
-	margin : 0 auto;
+	margin: 0 auto;
 }
 
 .above_menu {
@@ -53,34 +54,16 @@ a:hover {
 	display: inline;
 }
 
-#sub {
-	position: absolute;
-	display: none;
-	top: 30px;
-	left: 0;
-}
-
-#sub li {
-	display: inline-block;
-	text-align: center;
-	font-size: 0.95em;
-}
-
-#main li:hover #sub {
-	display: block;
-}
-
 .btn {
 	width: 120px;
 	height: 50px;
-	color: black;
+	color: rgb(64, 64, 64);
 	text-align: center;
 	background: rgb(224, 224, 224);
 	display: inline-block;
 	border-radius: 30px;
 	font-size: 1.2em;
-	font-weight:bold;
-	
+	font-weight: bold;
 }
 
 .btn2 {
@@ -91,6 +74,7 @@ a:hover {
 	border-radius: 30px;
 	display: inline-block;
 	font-size: 0.9em;
+	border:0;
 }
 
 .btn:hover {
@@ -115,17 +99,16 @@ a:hover {
 			User user = userdb.info(userID);
 			if (userID == null) {
 		%>
-		<a class="above_menu" href="../login/login.jsp">로그인</a> 
-		<a class="above_menu" href="../login/join.jsp">회원가입</a>
+		<a class="above_menu" href="../login/login.jsp">로그인</a> <a
+			class="above_menu" href="../login/join.jsp">회원가입</a>
 		<%
 			} else {
 		%>
-		<a class="above_menu" href="../logoutGo">로그아웃</a> 
-		<a class="above_menu" href="../profile/mypage.jsp">MyPage</a>
+		<a class="above_menu" href="logoutGo">로그아웃</a> <a class="above_menu"
+			href="../profile/mypage.jsp">MyPage</a>
 		<%
 			}
 		%>
-		<a class="above_menu" href="">현재접속자</a>
 	</div>
 	<hr width="100%" color="grey"  style="margin: 0;border: solid 1px lightgray;">
 	<div class="logo">
@@ -133,16 +116,7 @@ a:hover {
 	</div>
 	<div class="nav">
 		<ul id="main">
-			<li><button class="btn" onclick="location.href='../board/board.jsp'">Board</button>
-			<!-- 
-				<ul id="sub">
-					<li><a class="btn" href="board/board_list.jsp?type=all">전체게시판</a></li>
-					<li><a class="btn" href="board/board_list.jsp?type=free">자유게시판</a></li>
-					<li><a class="btn" href="board/board_list.jsp?type=busk">버스커게시판</a></li>
-				</ul>
-				 -->
-			</li>
-				
+			<li><button class="btn" onclick="location.href='../board/board.jsp'">Board</button>		
 			<li style="margin-left: 30px;"><button class="btn"
 					onclick="location.href='../schedule/schedule.jsp'">Schedule</button></li>
 			<li style="margin-left: 30px;"><button class="btn"

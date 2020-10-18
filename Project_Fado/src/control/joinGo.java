@@ -57,7 +57,7 @@ public class joinGo extends HttpServlet {
 			response.sendRedirect("join.jsp");
 		} else {
 			System.out.println("insert success");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("joinResult.jsp");
 
 		}
 	}
