@@ -33,25 +33,53 @@
 .table a {
 	padding-left: 20px;
 }
+
+.searchenter{
+background: rgb(52, 152, 219); font-size: 1.2em; font-weight: bold; border: 0; width: 50px; height: 60px;
+}
+
+@media (min-width: 768px) {
+.tableSet{
+margin-left: 20px; margin-right: 20px; color: black;
+}
+.search {
+background: rgb(52, 152, 219); margin-top: 50px; margin-left: 20px; margin-right: 20px;margin-bottom:30px; border-radius: 30px;
+}
+
+.insearch{
+background: white; width: 90%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;
+}
+}
+
+@media (min-width: 320px) and (max-width: 480px){ 
+.tableSet{
+color: black;
+}
+.search {
+background: rgb(52, 152, 219); margin-top: 50px;margin-bottom:30px; border-radius: 30px;
+}
+
+	.insearch{
+background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;
+}
+}
+
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
 	<%
 		BoardDAO db = new BoardDAO();
 		ArrayList<Board> list = null;
 	%>
-	<div class="content">
+	<div class="content container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<div style="background: rgb(52, 152, 219); margin-top: 50px; margin-left: 20px; margin-right: 20px;margin-bottom:30px;">
-					<input type="text" style="background: white; width: 800px; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;"
-						placeholder="통합검색">
-					<button type="submit" style="background: rgb(52, 152, 219); font-size: 1.2em; font-weight: bold; border: 0; width: 50px; height: 60px;">
-						<i class="fas fa-search fa-2x"></i>
-					</button>
+				<div class="search">
+					<input class="insearch" type="text" placeholder="통합검색">
+					<button class="searchenter" type="submit">Enter</button>
 				</div>
 			</div>
 
-			<div style="margin-left: 20px; margin-right: 20px; color: black;">
+			<div class="tableSet">
 				<div class="col-md-4">
 					<table class="table">
 						<thead>
@@ -76,7 +104,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-md-4" style="">
+				<div class="col-md-4" >
 					<table class="table">
 						<thead>
 							<tr>
@@ -100,7 +128,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-md-4" style="">
+				<div class="col-md-4">
 					<table class="table">
 						<thead>
 							<tr>

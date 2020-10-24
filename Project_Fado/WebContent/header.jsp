@@ -10,26 +10,23 @@
 <script src="https://kit.fontawesome.com/64de5f242b.js" crossorigin="64de5f242b"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#nav ul.sub").hide();
+		$("#nav ul.menu li").click(function(){
+			$("ul",this).slideToggle("fast");
+		});
+	});
+</script>
 <title>fado</title>
 </head>
 <style>
 a{
 	color:black;
+	text-decoration: none;
 }
-.above {
-	width: 960px;
-	height: 50px;
-	padding-top: 15px;
-	padding-bottom: 5px;
-	text-align: right;
-	margin: 0 auto;
-}
-
-.above_menu {
-	padding-right: 15px;
-	font-size: 0.95em;
-	color: black;
-}
+a:hover {text-decoration: none; }
 
 .logo {
 	font-size: 4em;
@@ -37,22 +34,35 @@ a{
 	text-align: center;
 }
 
-.nav {
-	margin-top: 30px;
-}
+	.above {
+		width: 50%;
+		height: 50px;
+		padding-top: 15px;
+		padding-bottom: 5px;
+		text-align: right;
+		margin: 0 auto;
+	}
+	.above_menu {
+		padding-right: 15px;
+		font-size: 0.95em;
+		color: black;
+	}
+	
+	.nav {
+		margin-top: 30px;
+	}
+	.nav ul {
+		width: 100%;
+		list-style: none;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+	#main li {
+		position: relative;
+		display: inline;
+	}
 
-.nav ul {
-	width: 100%;
-	list-style: none;
-	text-align: center;
-	margin: 0;
-	padding: 0;
-}
-
-#main li {
-	position: relative;
-	display: inline;
-}
 
 .btn {
 	width: 120px;
@@ -81,22 +91,47 @@ a{
 	background: rgb(52, 152, 219);
 	color: white;
 }
-.content {
-	margin: 0 auto;
-	margin-top: 30px;
-	background-color: rgb(174, 211, 229);
-	width: 960px;
-	height: 100%;
-	box-shadow: 5px 5px 15px 10px gray;
-	border-radius: 20px;
+@media (min-width: 768px) {
+	.mo {display:none;}
+	
+	.content {
+		margin: 0 auto;
+		margin-top: 30px;
+		background-color: rgb(174, 211, 229);
+		width: 60%;
+		height: 100%;
+		border-radius: 20px;
+		box-shadow: 5px 5px 15px 10px gray;
+	}
 }
+
+@media (min-width: 320px) and (max-width: 480px){ 
+	.pc {display:none;}
+	
+	.content {
+		margin: 0 auto;
+		margin-top: 30px;
+		background-color: rgb(174, 211, 229);
+		width: 100%;
+		height: 100%;
+	}
+}
+#nav ul{ width:100%; margin:0; padding:0; }
+#nav ul.menu li{ position:relative; float:left; width:100%; list-style-type:none; font-size:1.1em;}
+#nav ul.menu li a{ display:block; width:100%; height:100%; line-height:50px; color:#000; font-weight:bold; text-decoration:none; }
+#nav ul.menu li .sub a{ position:relative; float:left; display:block; width:100%; z-index:999; background:rgb(174, 211, 229); }
+
 </style>
-<header style="width: 100%; height: 100%;">
-	<div class="above">
-		<%
+
+<header>
+<%
 			UserDAO userdb = new UserDAO();
 			String userID = (String) session.getAttribute("id");
 			User user = userdb.info(userID);
+		%>
+		<div class="pc container-fluid">
+	<div class="above">
+		<%
 			if (userID == null) {
 		%>
 		<a class="above_menu" href="../login/login.jsp">로그인</a> <a
@@ -110,19 +145,49 @@ a{
 			}
 		%>
 	</div>
-	<hr width="100%" color="grey"  style="margin: 0;border: solid 1px lightgray;">
+	<hr width="100%"
+		style="margin: 0; border: solid 1px lightgray;">
 	<div class="logo">
 		<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"></a>
 	</div>
 	<div class="nav">
 		<ul id="main">
 			<li><button class="btn" onclick="location.href='../board/board.jsp'">Board</button>		
-			<li style="margin-left: 30px;"><button class="btn"
-					onclick="location.href='../schedule/schedule.jsp'">Schedule</button></li>
-			<li style="margin-left: 30px;"><button class="btn"
-					onclick="location.href='#'">PlayList</button></li>
-			<li style="margin-left: 30px;"><button class="btn"
-					onclick="location.href='#'">Notice</button></li>
+				<li style="margin-left: 30px;"><button class="btn"
+						onclick="location.href='../schedule/schedule.jsp'">Schedule</button></li>
+				<li style="margin-left: 30px;"><button class="btn"
+						onclick="location.href='#'">PlayList</button></li>
+				<li style="margin-left: 30px;"><button class="btn"
+						onclick="location.href='#'">Notice</button></li>
 		</ul>
 	</div>
+</div>
+
+<div class="mo container-fluid"> 
+	<div id="nav">
+		<ul class="menu" >
+			<li><i class="fas fa-bars fa-2x" style="display:inline;float:left;margin-top:10px;color:rgb(174, 211, 229);"></i>
+			<ul class="sub">
+			<%
+			if (userID == null) {
+		%>
+				<li><a href="../login/login.jsp">로그인</a>
+				<li><a href="../login/join.jsp">회원가입</a>	
+					<%
+			} else {
+		%>
+			<li><a href="logoutGo">로그아웃</a>
+				<li><a href="../profile/mypage.jsp">MyPage</a>	
+				<%
+			}
+		%>
+				<li><a href="../board/board.jsp">Board</a>		
+			<li><a href="../schedule/schedule.jsp">Schedule</a></li>
+			<li><a href="#">PlayList</a></li>
+			<li><a href="#">Notice</a></li>
+			</ul>
+			</li>
+		</ul>
+	</div>
+</div>
 </header>

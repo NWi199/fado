@@ -1,100 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>fado</title>
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
-<script>
-$(function() {
-	  $( "#datepicker" ).datepicker({
-	    dateFormat: 'yy.mm.dd',
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    dayNames: ['일','월','화','수','목','금','토'],
-	    dayNamesShort: ['일','월','화','수','목','금','토'],
-	    dayNamesMin: ['일','월','화','수','목','금','토'],
-	    showMonthAfterYear: true,
-	    changeMonth: true,
-	    changeYear: true,
-	    yearSuffix: '년'
-	  });
-	  $('#timepicker_S').timepicker({
-		    timeFormat: 'h:mm p',
-		    interval: 30,
-		    minTime: '8',
-		    maxTime: '11:50pm',
-		    startTime: '8:00',
-		    dynamic: false,
-		    dropdown: true,
-		    scrollbar: true
-		});
-	  $('#timepicker_E').timepicker({
-		    timeFormat: 'h:mm p',
-		    interval: 30,
-		    minTime: '8',
-		    maxTime: '11:50pm',
-		    startTime: '8:00',
-		    dynamic: false,
-		    dropdown: true,
-		    scrollbar: true
-		});
-	});
-
-</script> 
-    </head>
-    <style>
-	.btn2 {
+</head>
+<style>
+.btn2 {
 	width: 60px;
 	height: 30px;
 	color: white;
 	text-align: center;
 	background: rgb(52, 152, 219);
 	border-radius: 30px;
-	display:inline;
+	display: inline;
 	font-size: 0.9em;
-	}
-	.bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-    </style>
-    <body>
-    <div style="text-align:center;width:90%;margin:0 auto;"> 
-    <h3 style="margin-bottom:20px;"><strong>일정 입력</strong></h3>
-    <form method="post" name="writeform" action="scheWrite">
-    	<div class="form-group">
-            <input type="text" name="title"  placeholder="* 일정명" class="form-control">
+}
+
+.logo {
+	margin-left: 10%;
+	font-size: 4em;
+	padding-top: 100px;
+}
+.calView{
+	width:450px;
+	height:100%;
+	margin: 0 auto;
+	text-align:center;
+	margin-top:80px;
+	font-size:1.3em;
+}
+</style>
+<body oncontextmenu='return false' ondragstart='return false'>
+
+	<div style="margin-top: 100px;">
+		<a style="display: inline;" class="logo" href="../index.jsp"><img
+			src="../image/logo3.PNG" alt="fado"></a>
+		<div style="display: inline; font-weight: bold; font-size: 1.5em;">일정
+			관리</div>
+		<div style="display: inline;; margin-left: 10px;">
+			<button type="button" onclick="location.href='../profile/mypage.jsp'">MyPage</button>
+			<button type="button" onclick="location.href='schedule.jsp'">Schedule</button>
+		</div>
+	</div>
+	<hr>
+
+	<div class="calView">
+		<form method="post" name="writeform" action="scheWrite">
+		<div class="form-group" >
+            	<div style="font-size:0.8em;">
+            	공연날짜<input type="date" name="date" class="form-control" AUTOCOMPLETE="OFF" style="display:inline;width:350px;" >
+            	</div>
         </div>
-    	<div class="form-group">
-            <input type="text" name="busker" placeholder="공연자명(빈칸 시 작성자명)" class="form-control">
-        </div>
-        <div class="form-group" >
-            <input type="datetime" name="date" placeholder="* 공연 날짜" class="form-control" id="datepicker" >
+    	<div class="form-group" style="font-size:0.8em;">
+            	일정명<input type="text" name="title" class="form-control" style="display:inline;width:350px;" >
         </div>
         <div class="form-group">
-        <h5>공연시간</h5>
-        <input type="time" name="start" placeholder="* 시작 시간" class="form-control" id="timepicker_S" style="width:49%;display:inline;">
-        <input type="time" name="end" placeholder="* 종료 시간" class="form-control" id="timepicker_E" style="width:49%;display:inline;">
+           	<div style="font-size:0.8em;">
+           	시작시간<input type="time" name="start" class="form-control" AUTOCOMPLETE="OFF" style="display:inline;width:350px;">
+           	</div>
+        	<div style="font-size:0.8em;">
+        	종료시간<input type="time" name="end" class="form-control" AUTOCOMPLETE="OFF" style="display:inline;width:350px;">
+        	</div>
         </div>
-        <div class="form-group">
-        <input type="text" name="place" placeholder="* 공연 장소" class="form-control" style="width:300px;display:inline;float:left;"><a class="btn2" href="mapPopup.jsp">검색</a>
+        <div class="form-group" style="font-size:0.8em;">
+        	공연장소 <input type="text" name="place" class="form-control" style="width:300px;display:inline;float:left;"><a class="btn2" href="mapPopup.jsp">검색</a>
+        	<i></i>
         </div>
-        <div class="form-group">
-        <input type="text" name="detail" placeholder="상세 주소" class="form-control">
+        <div class="form-group" style="font-size:0.8em;">
+       		상세주소<input type="text" name="detail" class="form-control" style="display:inline;width:350px;" >
         </div>
-        <div class="form-group">
-            <input type="text" name="exp"  placeholder="공연 설명" class="form-control">
+        <div class="form-group" style="font-size:0.8em;">
+            공연설명<textarea name="exp" class="form-control"style="display:inline;width:350px;" ></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="font-size:0.8em;">
         	<label for="open">
         	<input type="radio" name="open" value="1" checked> 공개
         	<input type="radio" name="open" value="0"> 비공개
@@ -102,13 +86,14 @@ $(function() {
             
         </div>
 	    <div class="btnSet">
-	    	<button type="submit" class="btn2" value="저장" >저장</button>
-			<button class="btn2" value="취소" onclick="window.close()">취소</button>
+	    	<button type="submit" class="btn2">저장</button>
+			<button type="button" class="btn2">취소</button>
 	    </div>
-    </form>
-    </div>
+        </form>
+	</div>
 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="../js/bootstrap.js"></script>
-    </body>
-    
+</body>
+
 </html>

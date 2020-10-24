@@ -19,10 +19,9 @@ a:hover {
 	margin: 0 auto;
 }
 </style>
+<%@ include file="../header.jsp"%>
 <body oncontextmenu='return false' ondragstart='return false'>
-<%
-String userID = (String) session.getAttribute("id");
-%>
+
 <div class="content">
   <a href="userModify.jsp">정보수정</a>
 </div>	

@@ -7,14 +7,16 @@
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
-<style>
-	.btn2 {
-		background: rgb(52, 152, 219); width:60px;height:30px;
-	}
-	.board {
-	width:80%; text-align: center; margin: 0 auto;padding-top:50px;}
-</style>
+
 <%@ include file = "../header.jsp" %>
+<style>
+	.btn2 {background: rgb(52, 152, 219); width:60px; height:30px;text-align:center;}
+	.board {width:80%; }
+
+@media (min-width: 320px) and (max-width: 480px){ 
+	.board {width:100%; }
+}
+</style>
 <body>
 
 <%
@@ -32,43 +34,51 @@
 			BoardDAO db = new BoardDAO();
 			Board board = db.getBD(idx);
 			db.hit(idx, board.getHit());
+			String typeName = null;
+			String type = null;
+			if (board.getType() != null) {
+				type=board.getType();
+				if(type.equals("all"))
+					typeName = "전체게시판";
+				else if(type.equals("free"))
+					typeName = "자유게시판";
+				else if(type.equals("busk"))
+					typeName = "버스커게시판";
+			}
+			
 			
 		%>
 	<div class="content">
-		<div class="board container">
-		<div class="row" >
-			<table border="1" class="table" style="width:100%;background-color:white;">
-				<tbody >
-					<tr>
-						<td style="width:20%;">제목</td>
-						<td colspan="4" align=left><%= board.getTitle()%></td>
-					</tr>
-					<tr>
-						<td style="width:20%;">작성일</td>
-						<td colspan="2" align=left><%= board.getDate().substring(0, 11) + board.getDate().substring(11, 13) + "시" + board.getDate().substring(14, 16) + "분" %></td>
-						<td> 조회수 </td>
-						<td> <%= board.getHit()+1 %> </td>
-					</tr>
-					<tr>
-			 			<td colspan="5" align=left style="min-height: 200px;"><%= board.getContent() %></td>
-					</tr>
-				</tbody>
-			</table>
-		
-			<a href = "board_list.jsp?type=<%= board.getType() %>" class="btn2 pull-right">목록</a>
-				<%
-				//글작성자 본인일시 수정 삭제 가능 
+		<div class="board container-fluid">
+			<div style="background:white; text-align: left; padding:30px;border-radius: 20px;margin-top:50px;margin-bottom:30px;">
+				<div style="font-size:1.1em;margin-bottom:10px;"><a href="board_list.jsp?type=<%=board.getType() %>"><%=typeName %> ></a></div>
+				
+				<div style="margin-bottom:10px;">
+					<div style="font-size:2em;font-weight:bold;width:100%;"><%=board.getTitle() %></div>
+					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><%= board.getUserID() %> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
+				</div>
+				<div style="min-height:200px;margin-bottom:20px;padding:20px;font-size:1.1em;"><%= board.getContent() %></div>
+			</div>
+			<div style="font-size:1.5em;font-weight:bold;margin-bottom:10px;margin-left:20px;">댓글</div>
+			<div class="comment" style="background:white; text-align: left;padding:30px;border-radius:20px;margin-bottom:10px;">
+			sdfadadgadf
+		</div>
+		<div class="btnSet" style="margin-bottom:40px;">
+			<a href = "board_list.jsp?type=<%= board.getType() %>" class="btn2 pull-right" style="margin-left:10px;">목록</a>
+					<%
+					//글작성자 본인일시 수정 삭제 가능 
 					if(userID != null && userID.equals(board.getUserID())){ 
-				%>
-						<a href="update.jsp?idx=<%= idx %>" class="btn2 pull-right">수정</a>
-						<a href="boardDelete?idx=<%= idx %>" class="btn2 pull-right">삭제</a>
-				<%					
+					%>
+						<a href="update.jsp?idx=<%= idx %>" class="btn2 pull-right" style="margin-left:10px;">수정</a>
+						<a href="boardDelete?idx=<%= idx %>" class="btn2 pull-right" style="margin-left:10px;">삭제</a>
+					<%					
 
-					}
-				%>
-			
+						}
+					%>
 		</div>
+					
 		</div>
+		
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>

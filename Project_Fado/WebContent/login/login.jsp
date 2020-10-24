@@ -15,7 +15,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <style>
 
-.btn2 {
+.content {width:100%;height:100%;margin-top:5%;}
+.login {
+	margin: 0 auto;
+	text-align: center;
+}
+	.btn2 {
 	background: rgb(52, 152, 219);
 	width: 180px;
 	height: 40px;
@@ -24,25 +29,36 @@
 	display: inline-block;
 	font-size: 0.9em;
 	border:0;
-	font-size:1.1em;display:inline;
+	font-size:1.1em;
+	display:inline;
 	margin-top:30px;
 }
-.login {
-	margin: 0 auto;
-	text-align: center;
+
+@media (min-width: 768px) {
+.mo {display:none;}
+.table{margin:0 auto;width:30%;border:none;}
+}
+
+@media (min-width: 320px) and (max-width: 480px){ 
+.pc {display:none;}
+.table{margin:0 auto;width:90%;border:none;}
+.btn2 {
+	width: 40%;
+	height:50px;
+	display:inline;
+}
 }
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
 
-	<div class="content" style="witdh:100%;height:100%;margin-top:5%;">
+	<div class="content">
 		<div class="login">
 			<div class="logo">
-				<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado" style=""></a>
+				<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"></a>
 			</div>
-			<div style="background-image:url('')">
 			<div style="background:white;margin-top:50px;">
 				<form name="myForm" action="loginGo" method="post">
-					<table class="table" style="margin:0 auto;width:30%;border:none;" >
+					<table class="pc table">
 						<tbody style="margin:0 auto;">
 							<tr >
 								<td rowspan="2" style="width:200px;"><button type="submit" style="width:150px;height:120px;display: inline;background:gray;color:white;font-weight:bold;border-radius:10px;border:0px;font-size:1.3em;">로그인</button></td>
@@ -53,13 +69,26 @@
 							</tr>
 						</tbody>
 					</table>
-					<button type="button" class="btn2" onclick="location.href='join.jsp' ">회원가입</button>
-					<button type="button" class="btn2" style="margin-left:30px;">정보찾기</button>
+					
+					<table class="mo table">
+						<tbody style="margin:0 auto;">
+							<tr>
+								<td><input style="height:40px;" type="text" name="id" placeholder="아이디" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><input style="height:40px;" type="password" name="pw" AUTOCOMPLETE="OFF" placeholder="비밀번호" class="form-control"></td>
+							</tr>
+							<tr>
+								<td><button type="submit" class="btn2" style="width:100%;height:50px;background:gray;font-weight:bold;border-radius:10px;border:0px;font-size:1.3em;">로그인</button></td>
+							</tr>
+						</tbody>
+					</table>
+					<button type="button" class="btn2" onclick="location.href='join.jsp'">회원가입</button>
+					<button type="button" class="btn2" style="margin-left:20px;">정보찾기</button>
 				</form>
 			</div>
 			</div>
 		</div>
-	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>

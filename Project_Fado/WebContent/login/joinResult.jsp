@@ -35,6 +35,17 @@
 		background:rgb(202, 002, 522);
 		font-weight:bold;
 	}
+	
+	
+	@media (min-width: 768px) {
+	
+	.table{width:30%;margin:0 auto;border:solid 2px black;}
+	
+}
+
+@media (min-width: 320px) and (max-width: 480px){ 
+	.table{width:90%;margin:0 auto;border:solid 2px black;}
+}
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
 	<div class="content" style="width:100%;height:100%;text-align: center;margin: 0 auto;">
@@ -44,7 +55,7 @@
 	<div style="font-size:2.5em;font-weight:bold;margin-top:20px;">회원가입 성공</div>
 	<div style="font-size:1.8em;font-weight:bold;margin-top:40px;">환영합니다 !! "닉네임"님 </div>
 	<div style="margin-top:40px;">
-		<table class="table" style="width:30%;margin:0 auto;border:solid 2px black;">
+		<table class="table" style="">
 			<tbody>
 				<tr>
 					<td class="head">아이디</td>

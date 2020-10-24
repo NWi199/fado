@@ -68,10 +68,7 @@ a:hover {
 	<hr>
 	
 	<div class="calView">
-		<div>
-			
 			<div style="font-size: 3em; display: inline; color: black;"><%=sche.getDate() %></div>
-		</div>
 		<div style="margin-top:22px;">
 			<div style="font-size: 1.8em; color:black; font-weight:bold"><%=sche.getTitle() %></div>
 			<div style="font-size: 1.3em; color:black; font-weight:bold"><%=sche.getStart() %> ~ <%=sche.getEnd() %></div>

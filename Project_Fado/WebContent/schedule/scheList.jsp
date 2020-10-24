@@ -48,14 +48,6 @@
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.css">
 <script src="https://kit.fontawesome.com/64de5f242b.js"
 	crossorigin="64de5f242b"></script>
-<script type="text/javascript">
-	function insertPopup() {
-		window.name = "list";
-		openWin = window
-				.open("scheInsert.jsp", "insert",
-						"width=400, height=600, resizable=no, scrollbars=yes, status=no");
-	}
-</script>
 <script>
 	function goCalendar() {
 		var form = document.calendarTextBoxForm;
@@ -70,7 +62,7 @@
 		}
 		if ((form.month.value == "")) {
 			alert("'월'을 입력 주세요");
-			return;
+			return; 
 		}
 		if ((form.month.value < 1) || form.month.value > 12) {
 			alert("'월'을 올바르게 입력 주세요");
@@ -113,11 +105,18 @@
 		form.submit();
 	}
 </script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#nav ul.sub").hide();
+		$("#nav ul.menu li").click(function(){
+			$("ul",this).slideToggle("fast");
+		});
+	});
+</script>
+
 </head>
 <style>
-.cal{
-width:1000px; margin: 0 auto; text-align: center; margin-top: 20px;background:white;
-}
+
 a:hover {
 	text-decoration: none;
 }
@@ -161,40 +160,89 @@ a:hover {
     }
 .fas:hover .tooltip-content { visibility: visible; }
 
-table {
-table-layout: fixed;
-width:120px;
 
+@media (min-width: 768px) {
+	.mo {display:none;}
+	table {
+		table-layout: fixed;
+		width:120px;
+	}
+	.cal{
+		width:1000px; margin: 0 auto; text-align: center; margin-top: 20px;background:white;
+	}
+	.day {font-size: 3.5em; display: inline; color: black;}
 }
+
+@media (min-width: 320px) and (max-width: 480px){ 
+	.pc {display:none;}
+	table {
+		table-layout: fixed;
+		width:30px;
+	}
+	.cal{
+		width:90%; margin: 0 auto; text-align: center; margin-top: 20px;background:white;
+	}
+	.day{font-size: 3em; display: inline; color: black;float:left;}
+}
+
+#nav ul{ width:100%; margin:0; padding:0; }
+#nav ul.menu li{ position:relative; float:left; width:100%; list-style-type:none; font-size:1.1em;}
+#nav ul.menu li a{ display:block; width:100%; height:100%; line-height:50px; color:#000; font-weight:bold; text-decoration:none; }
+#nav ul.menu li .sub a{ position:relative; float:left; display:block; width:100%; z-index:999; background:rgb(174, 211, 229); }
 </style>
+
 <body oncontextmenu='return false' ondragstart='return false'>
 
-	<div style="margin-top: 100px;">
+	<div class="pc" style="margin-top: 100px;">
 		<a style="display: inline;" class="logo" href="../index.jsp"><img
 			src="../image/logo3.PNG" alt="fado"></a>
 		<div style="display: inline; font-weight: bold; font-size:1.5em;">일정 관리</div>
-		<i style="margin-left:15px" class="fas fa-bars fa-2x"></i>
+		<div style="display: inline;;margin-left:10px;">
+			<button type="button" onclick="location.href='../profile/mypage.jsp'">MyPage</button>
+			<button type="button" onclick="location.href='schedule.jsp'">Schedule</button>
+		</div>
+	</div>
+	
+	<div class="mo">
+		<div id="nav">
+		<ul class="menu" >
+			<li><i class="fas fa-bars fa-2x" style="display:inline;float:left;margin-top:10px;color:rgb(174, 211, 229);"></i>
+			<ul class="sub">
+			<%
+			if (userID == null) {
+		%>
+				<li><a href="../login/login.jsp">로그인</a>
+				<li><a href="../login/join.jsp">회원가입</a>	
+					<%
+			} else {
+		%>
+			<li><a href="logoutGo">로그아웃</a>
+				<li><a href="../profile/mypage.jsp">MyPage</a>	
+				<%
+			}
+		%>
+				<li><a href="../board/board.jsp">Board</a>		
+			<li><a href="../schedule/schedule.jsp">Schedule</a></li>
+			<li><a href="#">PlayList</a></li>
+			<li><a href="#">Notice</a></li>
+			</ul>
+			</li>
+		</ul>
+	</div>
+		<div style="font-weight: bold; font-size:1.5em;text-align:center;">일정 관리</div>
 	</div>
 	<hr>
-	<!-- 
 	
-	<button
-					onclick="location.href='../profile/mypage.jsp'">MyPage</button>
-				<button 
-					onclick="location.href='schedule.jsp'">Schedule</button>
-	
-	 -->
 				
 	<div class="cal">
-			
-			<div>
-				<a style="font-size: 3.5em; display: inline; color: black;"
+			<div class="day">
+				<a style=""
 					href="javascript:goMonth(<%=month - 1%>);"><i
 					class="fas fa-angle-left"></i></a>
-				<div style="font-size: 3.5em; display: inline; font-weight: bold;"><%=year%>.
+				<div><%=year%>.
 					<%=month + 1%>
 				</div>
-				<a style="font-size: 3.5em; display: inline; color: black;"
+				<a
 					href="javascript:goMonth(<%=month + 1%>);"><i
 					class="fas fa-angle-right "></i></a>
 			</div>
@@ -294,7 +342,7 @@ width:120px;
 							name="month" value="" />
 					</form>
 					<!-- TextBox 에 해당하는 폼 -->
-					<form name="calendarTextBoxForm" method="post">
+					<form name="calendarTextBoxForm" method="post" style="margin-bottom:50px;">
 						<input type="text" name="year" size="5" value="" maxlength="4" />
 						년 <input type="text" name="month" size="3" value="" maxlength="2" />
 						월 <input type="button" onclick="javascript:goCalendar();"

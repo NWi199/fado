@@ -66,16 +66,27 @@ String eDate = null;
   form.submit();
  }
 </script>
+
+<%@ include file="../header.jsp"%>
 <style>
 th{text-align:center;}
+.board {width:80%;margin:0 auto;padding-top:50px;text-align:center;}
+.place {background: rgb(52, 152, 219); height:50px;padding-top:8px;padding-left:20px;}
+.list{text-align:center; margin:0 auto; width:60%;}
+@media (min-width: 768px) {
+	.mo {display:none;}
+}
+
+@media (min-width: 320px) and (max-width: 480px){ 
+.pc {display:none;}	
+.board {width:100%;margin:0 auto;padding-top:50px;text-align:center;}
+}
 </style>
-<%@ include file="../header.jsp"%>
 <body oncontextmenu='return false' ondragstart='return false'>
 	<div class="content">
-		<div class="board container"
-			style="width:80%;margin:0 auto;padding-top:50px;text-align:center;">
+		<div class="board container-fluid">
 			<h1 style="text-align:center;font-size:3em;padding-bottom:20px;font-weight:bold;">공연 일정</h1>
-				<div class="place" style="background: rgb(52, 152, 219); height:50px;padding-top:8px;padding-left:20px;">
+				<div class="place">
 					<i class="fas fa-map-marker-alt fa-2x" style="display:inline-block;color:white;padding-right:10px;"></i>
 					<select class="form-control" name="sido1" id="sido1" style="width:150px;display:inline-block;"></select>
 					<select class="form-control" name="gugun1" id="gugun1" style="width:120px;display:inline-block;"></select>
@@ -94,16 +105,17 @@ th{text-align:center;}
 						ArrayList<Schedule> list = db.getList(eDate);
 						if (list.size() != 0) {
 				%>
-				<div style="text-align:center; margin:0 auto; width:500px">
+				<div class="list">
 					<div style="font-size:1.5em; float:left;font-weight:bold;"><%=i%>일
 					</div>
 					<div class="row">
-						<table class="table" style="text-align:center;">
+						<table class="pc table" style="text-align:center;">
 							<thead style="background:lightgrey;">
 								<tr >
 									<th style="text-align:center;font-weight:bold;font-size:1.15em;">팀명</th>
 									<th style="text-align:center;font-weight:bold;font-size:1.15em;">시간</th>
 									<th style="text-align:center;font-weight:bold;font-size:1.15em;">장소</th>
+									<th style="text-align:center;font-weight:bold;">자세히</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -115,7 +127,26 @@ th{text-align:center;}
 									<td style="width:120px;font-size:1.1em"><%=list.get(j).getBusker()%></td>
 									<td style="width:160px;"><%=list.get(j).getStart()%> ~ <%=list.get(j).getEnd()%></td>
 									<td style="width:220px;font-size:1.1em"><%=list.get(j).getPlace()%></td>
-									<td style="width:30px;"><a href="scheView.jsp?idx=<%=list.get(j).getId()%>"><i class="fas fa-angle-right "></i></a></td>
+									<td style="width:80px;"><a href="scheView.jsp?idx=<%=list.get(j).getId()%>"><i class="fas fa-angle-right "></i></a></td>
+								</tr>
+								
+								<%
+									} 
+								%>
+							</tbody>
+						</table>
+						
+						<table class="mo table" style="text-align:center;">
+							<tbody>
+								<%
+									for (int j = 0; j < list.size(); j++) {
+								%>
+								<tr>
+									<td>
+										<div style="width:100%;font-size:1.2em;font-weight:bold;"><%=list.get(j).getBusker()%></div>
+										<div><%=list.get(j).getStart()%> ~ <%=list.get(j).getEnd()%> <%=list.get(j).getPlace()%></div>
+									</td>
+									<td><a href="scheView.jsp?idx=<%=list.get(j).getId()%>"><i class="fas fa-angle-right "></i></a></td>
 								</tr>
 								
 								<%
@@ -126,8 +157,6 @@ th{text-align:center;}
 					</div>
 				</div>
 				<%
-						}else{
-							
 						}
 					}
 				
@@ -139,8 +168,6 @@ th{text-align:center;}
 					}
 						
 				%>
-				
-				
 			</div>
 			<!-- ◀ / ▶ 에 해당하는 폼 -->
 <form name="calendarHiddenForm" method="post">

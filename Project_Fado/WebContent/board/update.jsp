@@ -13,6 +13,9 @@
 	}
 	.board {
 	width:80%; text-align: center; margin: 0 auto;padding-top:50px;}
+	@media (min-width: 320px) and (max-width: 480px){ 
+	.board {width:100%;text-align: center; margin: 0 auto;padding-top:50px;}
+	}
 </style>
 <%@ include file = "../header.jsp" %>
 <body>
@@ -47,29 +50,30 @@
 			}
 		%>
 	<div class="content">
-		<div class="board container">
+		<div class="board container-fluid">
 			<form action="boardUpdate?idx=<%=idx%>" method="post">
 			<div>
 			<div class="row" >
            <table border="1" class="table" style="width:100%;background-color:white;">
-				<tbody >
-					<tr>
-						<td>제목</td>
-                <td colspan="2" align=left><input type="text" class="form-control" placeholder="제목"
-								name="title" maxlength="50" value="<%=board.getTitle()%>"></td>
-								<td style="width:150px;"><select class="form-control" name="type" id="type">
-                           <option value="free">자유게시판</option>
-                           <option value="busk">버스커게시판</option>
-            </select></td>
-								</tr>
-            <tr>
-                  <td colspan="4" align=left style="min-height: 200px;"><textarea class="form-control" placeholder="내용"
-									name="content" maxlength="2048" style="height: 350px;"><%=board.getContent()%></textarea></td>
-			</tr>
-			</tbody>
+           <tbody>
+	        			<tr>
+	        				<td><select class="form-control" name="type" id="type">
+	                           <option value="free">자유게시판</option>
+	                           <option value="busk">버스커게시판</option>
+            				</select></td>
+	        			</tr>
+	        			<tr>
+	        				<td><input type="text" class="form-control" name="title" id="title" placeholder="제목" value="<%=board.getTitle()%>"></td>
+	        			</tr>
+	        			<tr>
+	        			
+	        				<td><textarea class="form-control" name="content" id="content" placeholder="내용" style="min-height:200px;"><%=board.getContent()%></textarea></td>
+	        			</tr>
+	        		</tbody>
+	        		
 			</table>
 			<div class="btnSet">
-				<button onclick="location.href='board_list.jsp'" class="btn2 pull-right">목록</button>
+				<a class="btn2 pull-right" href='board.jsp'>취소</a>
 					<%
 					//글작성자 본인일시 수정 삭제 가능 
 						if(userID != null && userID.equals(board.getUserID())){ 

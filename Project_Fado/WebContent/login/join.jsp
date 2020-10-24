@@ -12,44 +12,62 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>fado</title>
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.css">
-<script src="https://kit.fontawesome.com/64de5f242b.js"
-	crossorigin="64de5f242b"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/64de5f242b.js" crossorigin="64de5f242b"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <style>
-.btn2 {
-	background: rgb(52, 152, 219);
-	width: 60px;
-	height: 30px;
-	color: white;
-	border-radius: 30px;
-	display: inline-block;
-	font-size: 0.9em;
-	border: 0px;
-}
 
-.login {
+
+.content {width: 100%; height: 100%; margin-top: 5%;}
+@media (min-width: 768px) {
+	.login {
 	width: 40%;
 	text-align: center;
 	margin: 0 auto;
 	padding-top: 50px;
+	}
+	.btn2 {
+	color: white;
+	border-radius: 30px;
+	display: inline-block;
+	border: 0px;
+	background: grey; width: 120px; height: 40px; font-size: 1.3em; margin-top: 20px;margin-right: 10px;
+	}
+	.table{margin:0 auto;width:80%;border:none;}
+	
+	
+}
+
+@media (min-width: 320px) and (max-width: 480px){ 
+	.login {
+		width: 100%;
+		text-align: center;
+		margin: 0 auto;
+		padding-top: 50px;
+	}
+	.btn2 {
+	color: white;
+	border-radius: 30px;
+	display: inline-block;
+	border: 0px;
+	background: grey; width: 120px; height: 40px; font-size: 1.1em; margin-top: 20px;margin-right: 10px;
+	}
+	.table{margin:0 auto;width:100%;border:none;}
+
 }
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
-	<div class="content" style="width: 100%; height: 100%; margin-top: 5%;">
-		<div class="login container">
+	<div class="content">
+		<div class="login container-fluid">
 			<div class="logo">
-				<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"
-					style=""></a>
+				<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"></a>
 			</div>
-			<div style="background-image: url('')">
-				<div style="background: white; margin-top: 50px;">
+				<div style="background:white;margin-top:50px;">
 					<p></p>
 					<form name="f" action="joinGo" method="post"
 						onsubmit="return checkValue();">
 						<table class="table"
-							style="margin: 0 auto; width: 80%; border: none;">
-							<tbody style="margin: 0 auto;">
+							style="">
+							<tbody style="margin:0 auto;">
 								<tr>
 									<td>아이디</td>
 									<td><input type="text" name="id" class="form-control"
@@ -82,16 +100,12 @@
 								</tr>
 								<tr>
 									<td>자기소개</td>
-									<td colspan="4"><textarea name="intro"
-										class="form-control" style="height:100px;resize: vertical;"></textarea>
-								</tr>
-
+									<td colspan="4"><textarea name="intro" class="form-control" style="height:100px;resize: vertical;"></textarea>
+								</tr>                     
 							</tbody>
 						</table>
-						<button type="button" class="btn2"
-							style="background: grey; width: 120px; height: 40px; font-size: 1.3em; margin-top: 20px; display: inline; margin-right: 10px;">중복확인</button>
-						<button type="submit" class="btn2"
-							style="width: 300px; height: 40px; font-size: 1.3em; margin-top: 20px; display: inline;">완료</button>
+						<button type="button" class="btn2">중복확인</button>
+						<button type="submit" class="btn2" style="background:rgb(52, 152, 219);">완료</button>
 						<button type="button" class="btn2" onclick="location.href='joinResult.jsp'">result</button>
 					</form>
 				</div>

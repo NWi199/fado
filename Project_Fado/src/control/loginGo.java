@@ -46,7 +46,8 @@ public class loginGo extends HttpServlet {
 		} else if(result==0) {
 			System.out.println("비밀번호 미일치");
 		} else if(result==-1) {
-			System.out.println("아이디 존재 안함");
+			System.out.println("아이디" + user.getId()+": 아이디 존재 안함");
+			response.sendRedirect("login.jsp");
 		} else if(result==-2) {
 			System.out.println("디비 오류");
 		}
