@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="model.UserDAO"%>
-<%@ page import="model.User"%>
+<%@ page import="model.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width">
@@ -102,6 +101,7 @@ a:hover {text-decoration: none; }
 		height: 100%;
 		border-radius: 20px;
 		box-shadow: 5px 5px 15px 10px gray;
+		padding-bottom:30px;
 	}
 }
 
@@ -114,6 +114,7 @@ a:hover {text-decoration: none; }
 		background-color: rgb(174, 211, 229);
 		width: 100%;
 		height: 100%;
+		padding-bottom:30px;
 	}
 }
 #nav ul{ width:100%; margin:0; padding:0; }

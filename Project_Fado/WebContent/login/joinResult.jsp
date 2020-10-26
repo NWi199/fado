@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="model.*"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,7 +32,7 @@
 	}
 	.head{
 		width:30%;
-		background:rgb(202, 002, 522);
+		background:rgb(174, 211, 229);
 		font-weight:bold;
 	}
 	
@@ -48,30 +48,39 @@
 }
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
+	<%
+			String userID = null;
+			if (request.getParameter("id") != null) {
+				userID = request.getParameter("id");
+			}
+			
+			UserDAO userdb = new UserDAO();
+			User user = userdb.info(userID);
+		%>
 	<div class="content" style="width:100%;height:100%;text-align: center;margin: 0 auto;">
 	<div class="logo">
 		<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado" style="margin-top:5%;padding-top:50px;"></a>	
 	</div>
 	<div style="font-size:2.5em;font-weight:bold;margin-top:20px;">회원가입 성공</div>
-	<div style="font-size:1.8em;font-weight:bold;margin-top:40px;">환영합니다 !! "닉네임"님 </div>
+	<div style="font-size:1.8em;font-weight:bold;margin-top:40px;">환영합니다 !! "<%=user.getName() %>"님 </div>
 	<div style="margin-top:40px;">
 		<table class="table" style="">
 			<tbody>
 				<tr>
 					<td class="head">아이디</td>
-					<td>clanz12</td>
+					<td><%=user.getId() %></td>
 				</tr>
 				<tr>
 					<td class="head">닉네임</td>
-					<td>NWi</td>
+					<td><%=user.getName() %></td>
 				</tr>
 				<tr>
 					<td class="head">이메일</td>
-					<td>tsupapa12@naver.com</td>
+					<td><%=user.getEmail() %></td>
 				</tr>
 				<tr>
 					<td class="head">활동 지역</td>
-					<td>충청남도 아산시</td>
+					<td><%=user.getSido()+" "+user.getGun()%></td>
 				</tr>
 			</tbody>
 		</table>

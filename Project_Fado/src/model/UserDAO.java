@@ -17,8 +17,22 @@ public class UserDAO {
 			e.printStackTrace(); // 오류가 무엇인지 출력
 		}
 	}
+	public String getDate() { 
+		String SQL = "SELECT NOW()";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return ""; //데이터베이스 오류
+	}
 	public int join(User user) {
-		String SQL = "INSERT INTO `member` VALUES (?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO `member` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user.getId());
@@ -26,6 +40,12 @@ public class UserDAO {
 			pstmt.setString(3, user.getName());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, "normal");
+			pstmt.setString(6, user.getSido());
+			pstmt.setString(7, user.getGun());
+			pstmt.setString(8, user.getExp());
+			pstmt.setString(9, getDate());
+			pstmt.setInt(10, 0);
+			pstmt.setInt(11, 0);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -66,6 +86,9 @@ public class UserDAO {
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
 				user.setPart(rs.getString("part"));
+				user.setSido(rs.getString("sido"));
+				user.setGun(rs.getString("gun"));
+				user.setExp(rs.getString("exp"));
 			}
 			return user;
 		}catch(Exception e) {
@@ -74,14 +97,17 @@ public class UserDAO {
 		return user;
 	}
 	
-	public int update(String id, String pw, String name, String email) {
-		String SQL = "UPDATE `member` SET pw = ?, name = ?, email = ? WHERE id = ?";
+	public int update(String id, String pw, String name, String email, String sido, String gun, String exp) {
+		String SQL = "UPDATE `member` SET pw = ?, name = ?, email = ?, sido=?, gun=?, exp =?WHERE id = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, pw);
 			pstmt.setString(2, name);
 			pstmt.setString(3, email);
 			pstmt.setString(4, id);
+			pstmt.setString(5, sido);
+			pstmt.setString(6, gun);
+			pstmt.setString(7, exp);
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

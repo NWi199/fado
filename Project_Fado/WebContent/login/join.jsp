@@ -243,7 +243,7 @@ $('document').ready(function() {
                 document.f.email.focus();
                 return false;
             }
-     
+     		/*
             for (var i = 0; i < document.f.email.value.length; i++) {
                 chm = document.f.email.value.charAt(i)
                 if (!(chm >= '0' && chm <= '9') && !(chm >= 'a' && chm <= 'z')&&!(chm >= 'A' && chm <= 'Z')) {
@@ -253,7 +253,7 @@ $('document').ready(function() {
                     return false;
                 }
             }
-     
+     		*/
             if (document.f.name.value == "") {
                 alert("닉네임을 입력하지 않았습니다.")
                 document.f.name.focus();
@@ -265,12 +265,6 @@ $('document').ready(function() {
                 document.f.name.focus();
                 return false;
             }
-            if(document.f.intro.value== ""){
-                alert("자기소개를 입력해주십시오.");
-                document.f.intro.focus();
-                return false;
-          }
-   
           if(document.f.intro.length>100){
                 alert("자기소개는 100자 이내입니다.");
                 document.f.intro.focus();

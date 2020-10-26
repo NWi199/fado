@@ -50,14 +50,17 @@ public class joinGo extends HttpServlet {
 		user.setPw(request.getParameter("pw"));
 		user.setName(request.getParameter("name"));
 		user.setEmail(request.getParameter("email"));
-
+		user.setSido(request.getParameter("sido1"));
+		user.setGun(request.getParameter("gugun1"));
+		user.setExp(request.getParameter("exp"));
+		
 		int result = db.join(user);
 		if (result == -1) {
 			System.out.println("중복되는 아이디");
 			response.sendRedirect("join.jsp");
 		} else {
 			System.out.println("insert success");
-			response.sendRedirect("joinResult.jsp");
+			response.sendRedirect("joinResult.jsp?id="+user.getId());
 
 		}
 	}

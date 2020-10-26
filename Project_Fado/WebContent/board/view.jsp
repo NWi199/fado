@@ -55,7 +55,7 @@
 				
 				<div style="margin-bottom:10px;">
 					<div style="font-size:2em;font-weight:bold;width:100%;"><%=board.getTitle() %></div>
-					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><%= board.getUserID() %> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
+					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><a href="../profile/mypage.jsp?otherID=<%= board.getUserID() %>"><%= board.getUserID() %></a> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
 				</div>
 				<div style="min-height:200px;margin-bottom:20px;padding:20px;font-size:1.1em;"><%= board.getContent() %></div>
 			</div>
