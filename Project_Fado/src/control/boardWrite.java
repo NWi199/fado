@@ -46,7 +46,7 @@ public class boardWrite extends HttpServlet {
 		board.setTitle(request.getParameter("title"));
 		board.setContent(request.getParameter("content"));
 		board.setType(request.getParameter("type"));
-		
+		board.setCom_open(Integer.parseInt(request.getParameter("open")));
 		
 		if (userID == null) {
 			System.out.print("로그인 안되어있음");
@@ -58,12 +58,12 @@ public class boardWrite extends HttpServlet {
 			System.out.print("입력 안된 사항이 있음");
 			
 		} else {
-			int result = db.write(board.getTitle(), userID, board.getContent(), board.getType());
+			int result = db.write(board.getTitle(), userID, board.getContent(), board.getType(), board.getCom_open());
 			if (result == -1) {
 				System.out.print("글작성 실패");
 			}else {
 				System.out.print("글작성 성공");
-				response.sendRedirect("board_list.jsp");
+				response.sendRedirect("board_list.jsp?type="+board.getType());
 			}
 			
 			

@@ -44,6 +44,7 @@ public class boardDelete extends HttpServlet {
 		if(request.getParameter("idx") != null){
 			idx = Integer.parseInt(request.getParameter("idx"));
 		}
+		board = db.getBD(idx);
 		if(idx == 0) {
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글 입니다')");
@@ -67,9 +68,9 @@ public class boardDelete extends HttpServlet {
 				script.println("</script>");
 			} else {
 				script.println("<script>");
-				script.println("alert('글 삭제 완료')");
-				script.println("location.href='board_list.jsp'");
+				script.println("alert('글 삭제 성공!')");
 				script.println("</script>");
+				response.sendRedirect("board_list.jsp?type=" + board.getType());
 			}
 		}
 	}

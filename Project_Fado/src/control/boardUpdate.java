@@ -39,6 +39,11 @@ public class boardUpdate extends HttpServlet {
 		Board board = new Board();
 		BoardDAO db = new BoardDAO();
 		
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		board.setType(request.getParameter("type"));
+		board.setCom_open(Integer.parseInt(request.getParameter("open")));
+		
 		if (session.getAttribute("id") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 			userID = (String) session.getAttribute("id");//유저아이디에 해당 세션값을 넣어준다.
 		}
@@ -59,18 +64,13 @@ public class boardUpdate extends HttpServlet {
 			script.println("</script>");			
 
 		}else{
-			if (request.getParameter("title") == "" || request.getParameter("content") == "") {
+			if (board.getTitle() == "" || board.getContent() == "") {
 				script.println("<script>");
 				script.println("alert('입력이 안된 사항이 있습니다')");
 				script.println("history.back()");
 				script.println("</script>");
-			} else if(request.getParameter("title") == board.getTitle() || request.getParameter("content") == board.getContent()) {
-				script.println("<script>");
-				script.println("alert('내용이 같습니다')");
-				script.println("history.back()");
-				script.println("</script>");
 			}else {
-				int result = db.update(idx, request.getParameter("title"), request.getParameter("content"), request.getParameter("type"));
+				int result = db.update(idx, request.getParameter("title"), request.getParameter("content"), request.getParameter("type"), board.getCom_open());
 				if (result == -1) {
 					script.println("<script>");
 					script.println("alert('글 수정에 실패했습니다')");
@@ -79,7 +79,7 @@ public class boardUpdate extends HttpServlet {
 				} else {
 					script.println("<script>");
 					script.println("alert('글 수정을 성공했습니다')");
-					response.sendRedirect("board_list.jsp?idx=" + idx);
+					response.sendRedirect("view.jsp?idx=" + idx);
 					script.println("</script>");
 				}
 

@@ -7,7 +7,31 @@ public class Board {
 	private String date;  // 작성일
 	private String userID;  // 작성자
 	private int hit;  // 조회수
-	private String type;  // 게시판
+	private String type;  // 게시판 종류
+	private int comment;  // 댓글 수
+	private int com_open;  // 댓글 여부
+	private String modify;  // 수정일
+	
+	public int getComment() {
+		return comment;
+	}
+	public void setComment(int comment) {
+		this.comment = comment;
+	}
+	
+	public String getModify() {
+		return modify;
+	}
+	public void setModify(String modify) {
+		this.modify = modify;
+	}
+	public int getCom_open() {
+		return com_open;
+	}
+	public void setCom_open(int com_open) {
+		this.com_open = com_open;
+	}
+	
 	public int getIdx() {
 		return idx;
 	}

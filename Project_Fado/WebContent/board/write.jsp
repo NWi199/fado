@@ -15,25 +15,33 @@
 <body oncontextmenu='return false' ondragstart='return false'>
 	<div class="content">
 		<div class="board container-fluid">
-	        <form action="boardWrite" method="post">
+	        <form name="f" action="boardWrite" method="post" onsubmit="return checkValue();">
 	        	<table class="table" style="background:white;text-align:center;margin-top:50px;">
 	        		<tbody>
 	        			<tr>
-	        				<td><select class="form-control" name="type" id="type">
+	        				<td><select class="form-control" name="type" id="type" style="width:200px;">
 	                           <option value="free">자유게시판</option>
 	                           <option value="busk">버스커게시판</option>
-            				</select></td>
+            				</select>
+		        
+            				</td>
 	        			</tr>
 	        			<tr>
 	        				<td><input type="text" class="form-control" name="title" id="title" placeholder="제목"></td>
 	        			</tr>
 	        			<tr>
-	        			
 	        				<td><textarea class="form-control" name="content" id="content" placeholder="내용" style="min-height:200px;"></textarea></td>
+	        			</tr>
+	        			<tr>
+	        				<td>댓글 사용 여부&nbsp;&nbsp; <label for="open">
+		        			<input type="radio" name="open" value="1" checked> O
+		        			<input type="radio" name="open" value="0">X
+		        			</label>
+		        			</td>
 	        			</tr>
 	        		</tbody>
 	        	</table>
-	        	 <button class="btn2" onclick="history.back();" style="float:right;display:inline;">취소</button>
+	        <button class="btn2" type="button" onclick="history.back();" style="float:right;display:inline;margin-left:10px;">취소</button>
 	        <button class="btn2" type="submit" style="float:right;display:inline;">작성</button>
 	        </form>
 	       
@@ -42,7 +50,22 @@
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
+	<script type="text/javascript">
 
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+        function checkValue()
+        {
+            if (f.title.value == "") {
+                alert("제목을 입력하지 않았습니다.")
+                f.title.focus();
+                return false;
+            }
+            if (f.content.value == "") {
+                alert("내용을 입력하지 않았습니다.")
+                f.content.focus();
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>

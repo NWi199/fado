@@ -63,6 +63,9 @@ background: rgb(52, 152, 219); margin-top: 50px;margin-bottom:30px; border-radiu
 background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;
 }
 }
+ #quick_bg {margin:0 auto;text-align:center;position:relative;}
+ #quick {position:absolute;z-index:2;top:15px;width:153px;right:40px;}
+ #container {position:relative;}
 
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
@@ -70,7 +73,21 @@ background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3e
 		BoardDAO db = new BoardDAO();
 		ArrayList<Board> list = null;
 	%>
-	<div class="content container-fluid">
+	<div class="content container-fluid" > 
+	<%
+				if (userID != null) {
+			%>
+				<div id="quick_bg">
+					<div id="quick">
+						<a href="write.jsp"><i class="fas fa-plus-circle fa-5x" style="color:rgb(255,200,155);"></i></a>
+					</div>
+				</div>
+				<%
+				}else{
+					
+				}
+			%>
+	
 		<div class="row">
 			<div class="col-md-12">
 				<div class="search">
@@ -154,11 +171,23 @@ background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3e
 						</tbody>
 					</table>
 				</div>
-			</div>
+				
+			</div>	
 		</div>
 	</div>
-
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
+	<script>
+	var quick_menu = $('#quick');
+	var quick_top = 300;
+
+	quick_menu.css('top', $(window).height() );
+	$(document).ready(function(){
+	quick_menu.animate( { "top": $(document).scrollTop() + quick_top +"px" }, 100 ); 
+	$(window).scroll(function(){
+	quick_menu.stop();
+	quick_menu.animate( { "top": $(document).scrollTop() + quick_top + "px" }, 300 );
+	});
+	});</script>
 </body>
 </html>

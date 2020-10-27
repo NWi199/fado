@@ -144,7 +144,7 @@ iframe {
 		margin: 0 auto;
 		margin-top: 30px;
 		background-color: rgb(174, 211, 229);
-		width: 950px;
+		width: 60%;
 		height: 100%;
 		border-radius: 20px;
 		box-shadow: 5px 5px 15px 10px gray;

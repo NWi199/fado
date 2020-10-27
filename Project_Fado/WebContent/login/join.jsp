@@ -111,7 +111,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -243,17 +243,17 @@ $('document').ready(function() {
                 document.f.email.focus();
                 return false;
             }
-     		/*
+     		
             for (var i = 0; i < document.f.email.value.length; i++) {
                 chm = document.f.email.value.charAt(i)
-                if (!(chm >= '0' && chm <= '9') && !(chm >= 'a' && chm <= 'z')&&!(chm >= 'A' && chm <= 'Z')) {
+                if (!(chm >= '0' && chm <= '9') && !(chm >= 'a' && chm <= 'z')&&!(chm >= 'A' && chm <= 'Z')&&(chm=='@')) {
                     alert("이메일은 영문 대소문자, 숫자만 입력가능합니다.")
                     document.f.email.focus();
                     document.f.email.select();
                     return false;
                 }
             }
-     		*/
+     		
             if (document.f.name.value == "") {
                 alert("닉네임을 입력하지 않았습니다.")
                 document.f.name.focus();

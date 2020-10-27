@@ -32,6 +32,7 @@ $('.selectpicker').selectpicker();
 }
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
+
 	<%
 	String typeName = null;
 	String type = null;
@@ -46,13 +47,14 @@ $('.selectpicker').selectpicker();
 	}
 %>
 	<div class="content container-fluid">
+	
 		<div class="board">
 			<div style="width:100%">
 				<div class="type"><%= typeName %></div>
 			<%
 				if (userID != null) {
 			%>
-				<button class="btn2 write" onclick="location.href='write.jsp'" style="">작성</button>
+				<%@ include file="../floating.jsp"%>
 				<%
 				}else{
 					
@@ -96,7 +98,7 @@ $('.selectpicker').selectpicker();
 						<tr>
 							<td style="width:30px;"><%=list.get(i).getIdx() %></td>
 							<td style="width:60px;"><%=list.get(i).getUserID() %></td>
-							<td style="width:300px;"><a href="view.jsp?idx=<%= list.get(i).getIdx() %>"><%= list.get(i).getTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replace("\n","<br>") %></a></td>
+							<td style="width:300px;font-weight:bold;"><a href="view.jsp?idx=<%= list.get(i).getIdx() %>"><%= list.get(i).getTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replace("\n","<br>") %></a></td>
 							<td style="width:120px;"><%=list.get(i).getDate() %></td>
 							<td style="width:30px;"><%=list.get(i).getHit() %></td>
 						</tr>
@@ -116,7 +118,7 @@ $('.selectpicker').selectpicker();
 								<div style="text-align:left;font-size:1.1em;font-weight:bold;"><a href="view.jsp?idx=<%= list.get(i).getIdx() %>"><%= list.get(i).getTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replace("\n","<br>") %></a></div>
 								<div style="text-align:left;"><%=list.get(i).getUserID() %> | <%=list.get(i).getDate() %> | 조회수:<%=list.get(i).getHit() %></div>
 							</td>
-							<td class="btn2" style="width:50px;">댓글수 </td>
+							<td class="btn2" style="width:50px;"><%= list.get(i).getComment() %></td>
 						</tr>
 						<%
 						}

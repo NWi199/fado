@@ -69,6 +69,13 @@
 	        			
 	        				<td><textarea class="form-control" name="content" id="content" placeholder="내용" style="min-height:200px;"><%=board.getContent()%></textarea></td>
 	        			</tr>
+	        			<tr>
+	        				<td>댓글 사용 여부&nbsp;&nbsp; <label for="open">
+		        			<input type="radio" name="open" value="1" checked> O
+		        			<input type="radio" name="open" value="0">X
+		        			</label>
+		        			</td>
+	        			</tr>
 	        		</tbody>
 	        		
 			</table>
