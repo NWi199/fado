@@ -5,12 +5,20 @@ public class Board {
 	private String title;  // 제목
 	private String content;  // 내용
 	private String date;  // 작성일
-	private String userID;  // 작성자
+	private String  userID;  // 작성자
+	private String userName; // 닉네임
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	private int hit;  // 조회수
 	private String type;  // 게시판 종류
 	private int comment;  // 댓글 수
 	private int com_open;  // 댓글 여부
 	private String modify;  // 수정일
+	
 	
 	public int getComment() {
 		return comment;

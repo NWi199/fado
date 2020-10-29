@@ -31,11 +31,12 @@ public class loginGo extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		
+		PrintWriter script = response.getWriter();
 		User user = new User();
 		
 		user.setId(request.getParameter("id"));
 		user.setPw(request.getParameter("pw"));
+		
 		
 		int result = db.login(user.getId(), user.getPw());
 		if (result == 1) {
@@ -45,11 +46,19 @@ public class loginGo extends HttpServlet {
             response.sendRedirect("../index.jsp");
 		} else if(result==0) {
 			System.out.println("비밀번호 미일치");
+			script.println("<script>");
+			script.println("alert('아이디나 비밀번호가 일치하지 않습니다.')");
+			script.println("history.back();");
+			script.println("</script>");
 		} else if(result==-1) {
-			System.out.println("아이디" + user.getId()+": 아이디 존재 안함");
-			response.sendRedirect("login.jsp");
+			System.out.println("아이디 없음");
+			script.println("<script>");
+			script.println("alert('아이디나 비밀번호가 일치하지 않습니다.')");
+			script.println("history.back();");
+			script.println("</script>");
 		} else if(result==-2) {
 			System.out.println("디비 오류");
 		}
 	}
+	
 }

@@ -46,8 +46,8 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>fado</title>
 <link type="text/css" rel="stylesheet" href="../css/bootstrap.css">
-<script src="https://kit.fontawesome.com/64de5f242b.js"
-	crossorigin="64de5f242b"></script>
+<script src="https://kit.fontawesome.com/64de5f242b.js" crossorigin="64de5f242b"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 	function goCalendar() {
 		var form = document.calendarTextBoxForm;
@@ -105,7 +105,7 @@
 		form.submit();
 	}
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#nav ul.sub").hide();
 		$("#nav ul.menu li").click(function(){
@@ -158,9 +158,18 @@ a:hover {
 	border-color: black transparent transparent transparent;
 
     }
-.fas:hover .tooltip-content { visibility: visible; }
-
-
+.fas:hover .tooltip-content { visibility: visible;}
+.btn2 {
+	background: rgb(52, 152, 219);
+	width: 60px;
+	height: 30px;
+	color: white;
+	border-radius: 10px;
+	display: inline-block;
+	font-size: 0.9em;
+	border:0px;
+}
+.day{display:inline-block;font-size:3em;color:black;}
 @media (min-width: 768px) {
 	.mo {display:none;}
 	table {
@@ -170,7 +179,7 @@ a:hover {
 	.cal{
 		width:1000px; margin: 0 auto; text-align: center; margin-top: 20px;background:white;
 	}
-	.day {font-size: 3.5em; display: inline; color: black;}
+	
 }
 
 @media (min-width: 320px) and (max-width: 480px){ 
@@ -182,22 +191,20 @@ a:hover {
 	.cal{
 		width:90%; margin: 0 auto; text-align: center; margin-top: 20px;background:white;
 	}
-	.day{font-size: 3em; display: inline; color: black;float:left;}
 }
 
 #nav ul{ width:100%; margin:0; padding:0; }
 #nav ul.menu li{ position:relative; float:left; width:100%; list-style-type:none; font-size:1.1em;}
 #nav ul.menu li a{ display:block; width:100%; height:100%; line-height:50px; color:#000; font-weight:bold; text-decoration:none; }
 #nav ul.menu li .sub a{ position:relative; float:left; display:block; width:100%; z-index:999; background:rgb(174, 211, 229); }
+
 </style>
-
-<body oncontextmenu='return false' ondragstart='return false'>
-
+<header>
 	<div class="pc" style="margin-top: 100px;">
 		<a style="display: inline;" class="logo" href="../index.jsp"><img
 			src="../image/logo3.PNG" alt="fado"></a>
 		<div style="display: inline; font-weight: bold; font-size:1.5em;">일정 관리</div>
-		<div style="display: inline;;margin-left:10px;">
+		<div style="display: inline;margin-left:10px;">
 			<button type="button" onclick="location.href='../profile/mypage.jsp'">MyPage</button>
 			<button type="button" onclick="location.href='schedule.jsp'">Schedule</button>
 		</div>
@@ -205,8 +212,8 @@ a:hover {
 	
 	<div class="mo">
 		<div id="nav">
-		<ul class="menu" >
-			<li><i class="fas fa-bars fa-2x" style="display:inline;float:left;margin-top:10px;color:rgb(174, 211, 229);"></i>
+		<ul class="menu">
+			<li><i class="fas fa-bars fa-2x" style="display:inline;float:left;margin-left:20px;color:rgb(174, 211, 229);"></i>
 			<ul class="sub">
 			<%
 			if (userID == null) {
@@ -221,6 +228,7 @@ a:hover {
 				<%
 			}
 		%>
+		<li><a href="../index.jsp">Home</a></li>
 				<li><a href="../board/board.jsp">Board</a>		
 			<li><a href="../schedule/schedule.jsp">Schedule</a></li>
 			<li><a href="#">PlayList</a></li>
@@ -229,24 +237,18 @@ a:hover {
 			</li>
 		</ul>
 	</div>
-		<div style="font-weight: bold; font-size:1.5em;text-align:center;">일정 관리</div>
+		<div style="font-weight: bold; font-size:1.5em;text-align:center;margin-top:20px;">일정 관리</div>
 	</div>
 	<hr>
-	
-				
+</header>
+<body oncontextmenu='return false' ondragstart='return false'>		
 	<div class="cal">
-			<div class="day">
-				<a style=""
-					href="javascript:goMonth(<%=month - 1%>);"><i
-					class="fas fa-angle-left"></i></a>
-				<div><%=year%>.
-					<%=month + 1%>
-				</div>
-				<a
-					href="javascript:goMonth(<%=month + 1%>);"><i
-					class="fas fa-angle-right "></i></a>
+			<div>
+				<a class="day" href="javascript:goMonth(<%=month - 1%>);"><i class="fas fa-angle-left"></i></a>
+				<div class="day" >&nbsp;&nbsp;<%=year%>.<%=month + 1%>&nbsp;&nbsp;</div>
+				<a class="day" href="javascript:goMonth(<%=month + 1%>);"><i class="fas fa-angle-right"></i></a>
 			</div>
-			<a href="scheInsert.jsp">추가</a>
+			<button class="btn2" type="button" onclick="location.href='scheInsert.jsp'" style="width:100px;font-size:1.3em;margin-bottom:20px;">일정 추가</button>
 			<div >
 				<div class="row">
 					<table class="table">

@@ -14,7 +14,6 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <style>
-
 .content {width:100%;height:100%;margin-top:5%;}
 .login {
 	margin: 0 auto;
@@ -33,12 +32,10 @@
 	display:inline;
 	margin-top:30px;
 }
-
 @media (min-width: 768px) {
 .mo {display:none;}
 .table{margin:0 auto;width:30%;border:none;}
 }
-
 @media (min-width: 320px) and (max-width: 480px){ 
 .pc {display:none;}
 .table{margin:0 auto;width:90%;border:none;}

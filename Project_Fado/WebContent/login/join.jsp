@@ -16,6 +16,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <style>
 
+.logo {
+	margin-left: 10%;
+	font-size: 4em;
+	padding-top: 100px;
+}
 
 .content {width: 100%; height: 100%; margin-top: 5%;}
 @media (min-width: 768px) {
@@ -57,16 +62,17 @@
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
 	<div class="content">
+	
+			<a style="display: inline;" class="logo" href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"></a>
+			<div style="display: inline; font-weight: bold; font-size:1.5em;">회원가입</div>
+			<hr>
+		
 		<div class="login container-fluid">
-			<div class="logo">
-				<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"></a>
-			</div>
 				<div style="background:white;margin-top:50px;">
 					<p></p>
 					<form name="f" action="joinGo" method="post"
 						onsubmit="return checkValue();">
-						<table class="table"
-							style="">
+						<table class="table">
 							<tbody style="margin:0 auto;">
 								<tr>
 									<td>아이디</td>
@@ -106,7 +112,6 @@
 						</table>
 						<button type="button" class="btn2">중복확인</button>
 						<button type="submit" class="btn2" style="background:rgb(52, 152, 219);">완료</button>
-						<button type="button" class="btn2" onclick="location.href='joinResult.jsp'">result</button>
 					</form>
 				</div>
 			</div>
@@ -200,74 +205,72 @@ $('document').ready(function() {
                 return false;
             }
             //아이디 길이 체크 (4~12자)
-           if (document.f.id.value.length<4 || document.f.id.value.length>12) {
+           if (f.id.value.length<4 || f.id.value.length>12) {
                 alert("아이디를 4~12자까지 입력해주세요.")
-                document.f.id.focus();
-                document.f.id.select();
+                f.id.focus();
+                f.id.select();
                 return false;
             }
+            
+           if (!isNaN(f.id.value.substr(0,1)))
+           {
+                alert("아이디는 숫자로 시작할 수 없습니다.");
+                f.id.select();
+                return;
+           }
+  
                //비밀번호 입력여부 체크
-            if (document.f.pw.value == "") {
+            if (f.pw.value == "") {
                 alert("비밀번호를 입력하지 않았습니다.")
-                document.f.password.focus();
+                f.pw.focus();
                 return false;
             }
             if (f.pw.value == f.id.value) {
                 alert("아이디와 비밀번호가 같습니다.")
-                document.f.pw.focus();
+                f.pw.focus();
                 return false;
             }
             //비밀번호 길이 체크(4~8자 까지 허용)
-            if (document.f.pw.value.length<4 || document.f.pw.value.length>12) {
+            if (f.pw.value.length<4 || f.pw.value.length>12) {
                 alert("비밀번호를 4~12자까지 입력해주세요.")
-                document.f.pw.focus();
-                document.f.pw.select();
+                f.pw.focus();
+                f.pw.select();
                 return false;
             }
             //비밀번호와 비밀번호 확인 일치여부 체크
-            if (document.f.pw.value != document.f.pw2.value) {
+            if (f.pw.value != f.pw2.value) {
                 alert("비밀번호가 일치하지 않습니다")
-                document.f.pw1.value = ""
-                document.f.pw1.focus();
+                f.pw1.value = ""
+                f.pw1.focus();
                 return false;
             }
      
-            if (document.f.email.value == "") {
+            if (f.email.value == "") {
                 alert("이메일을 입력하지 않았습니다.")
-                document.email.focus();
+                f.email.focus();
                 return false;
             }
-            if (regex.test(document.f.email.value) == false) {
+            if (regex.test(f.email.value) == false) {
                 alert("잘못된 이메일 형식입니다.");
-                document.f.email.value=""
-                document.f.email.focus();
+                f.email.value=""
+                f.email.focus();
                 return false;
             }
      		
-            for (var i = 0; i < document.f.email.value.length; i++) {
-                chm = document.f.email.value.charAt(i)
-                if (!(chm >= '0' && chm <= '9') && !(chm >= 'a' && chm <= 'z')&&!(chm >= 'A' && chm <= 'Z')&&(chm=='@')) {
-                    alert("이메일은 영문 대소문자, 숫자만 입력가능합니다.")
-                    document.f.email.focus();
-                    document.f.email.select();
-                    return false;
-                }
-            }
-     		
-            if (document.f.name.value == "") {
+            if (f.name.value == "") {
                 alert("닉네임을 입력하지 않았습니다.")
-                document.f.name.focus();
+                f.name.focus();
                 return false;
             }
      
-            if(document.f.name.value.length<2){
+            if(f.name.value.length<2){
                 alert("닉네임을 2자 이상 입력해주십시오.")
-                document.f.name.focus();
+                f.name.focus();
                 return false;
             }
-          if(document.f.intro.length>100){
+          if(f.intro.length>100){
                 alert("자기소개는 100자 이내입니다.");
-                document.f.intro.focus();
+                f.intro.focus();
                 return false;
           }
         }

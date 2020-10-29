@@ -97,8 +97,39 @@ public class UserDAO {
 		return user;
 	}
 	
+	public User idSearch(String email) {
+		User user = null;
+		String SQL = "SELECT * FROM `member` WHERE email = ?";
+		try {
+			user = new User();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user.setId(rs.getString("id"));
+			}
+			return user;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	public int pwChange(String pw, String id) {
+		String SQL = "UPDATE `member` SET pw = ? WHERE id = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public int update(String id, String pw, String name, String email, String sido, String gun, String exp) {
-		String SQL = "UPDATE `member` SET pw = ?, name = ?, email = ?, sido=?, gun=?, exp =?WHERE id = ?";
+		String SQL = "UPDATE `member` SET pw = ?, name = ?, email = ?, sido=?, gun=?, exp =? WHERE id = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, pw);

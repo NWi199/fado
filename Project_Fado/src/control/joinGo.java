@@ -41,7 +41,7 @@ public class joinGo extends HttpServlet {
 		if (session.getAttribute("id") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 			script.println("<script>");
 			script.println("alert('이미 로그인 되어있습니다')");
-			script.println("location.href='board_list.jsp'");
+			script.println("location.href='index.jsp'");
 			script.println("</script>");
 		}
 		
@@ -58,7 +58,10 @@ public class joinGo extends HttpServlet {
 		if (result == -1) {
 			System.out.println("중복되는 아이디");
 			response.sendRedirect("join.jsp");
-		} else {
+		} else if(user.getId().equals("")||user.getPw().equals("")||user.getName().equals("")) {
+			System.out.print("입력 안된 사항이 있음");
+			response.sendRedirect("join.jsp");
+		}else {
 			System.out.println("insert success");
 			response.sendRedirect("joinResult.jsp?id="+user.getId());
 

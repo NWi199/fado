@@ -154,8 +154,9 @@ iframe {
 	.favorite {background: YELLOW;width:100%; height: 150px;margin-left:20px;margin-bottom:20px;}
 	.login {width: 90%;height: 170px;margin-top:20px;margin-left:10px;padding-top:20px;background:white;border-radius:30px;}
 	.chart {width:90%;height:345px;text-align:center;background:white;padding-top:10px;padding-bottom:15px;margin-top:20px;margin-left:10px;border-radius:30px;}
-	.boardSet{margin-right:20px;color:black;}
-	.sche{width:100%;background:white;border-radius:30px;margin-left:20px;margin-bottom:20px;padding-top:15px;padding-bottom:15px;padding-left:30px;}
+	.boardSet{margin-right:20px;color:black;padding-left:40px;padding-right:40px;}
+	.sche{width:100%;background:white;min-height:250px;border-radius:30px;margin-left:20px;margin-bottom:20px;padding-top:15px;padding-bottom:15px;padding-left:30px;}
+	.list{min-height:250px;background:white;border-radius: 30px;margin-bottom:20px;margin-right:20px;padding-top: 10px;padding-bottom: 15px;padding-left:20px;}
 }
 
 @media (min-width: 320px) and (max-width: 480px){ 
@@ -174,7 +175,8 @@ iframe {
 	.login {width:100%;height:170px;margin-top:20px;padding-top:20px;background:white;border-radius:30px;}
 	.chart {width:100%;height:345px;text-align:center;background:white;padding-top:5px;padding-bottom:15px;margin-top:20px;border-radius:30px;}
 	.boardSet{margin-top:20px;color:black;}
-	.sche{width:100%;background:white;border-radius:30px;margin-top:20px;margin-bottom:20px;padding-top:15px;padding-bottom:15px;padding-left:30px;}
+	.sche{width:100%;background:white;min-height:250px;border-radius:30px;margin-top:20px;margin-bottom:20px;padding-top:15px;padding-bottom:15px;padding-left:30px;}
+	.list{min-height:250px;background:white;border-radius:30px;margin-bottom:20px;padding-top: 10px;padding-bottom: 15px;padding-left:20px;}
 }
 
 #nav ul{ width:100%; margin:0; padding:0; }
@@ -186,6 +188,7 @@ iframe {
 
 <header>
 <%
+
 			UserDAO userdb = new UserDAO();
 			String userID = (String) session.getAttribute("id");
 			User user = userdb.info(userID);
@@ -282,7 +285,7 @@ iframe {
 							<button onclick="location.href='login/login.jsp'" class="btn2"
 								style="width:70%; height:70px; margin:0 auto;margin-top:10px;border-radius: 20px;font-size:1.2em;font-weight:bold;">로그인</button>
 						</div>
-						<div style="text-align:center;marign:0 auto;padding:15px 25px 0px 25px;"><a href="login/join.jsp">회원가입</a>&nbsp;|&nbsp;<a>회원정보찾기</a></div>
+						<div style="text-align:center;marign:0 auto;padding:15px 25px 0px 25px;"><a href="login/join.jsp">회원가입</a>&nbsp;|&nbsp;<a href="profile/userSearch.jsp">회원정보찾기</a></div>
 
 						<%
 							} else {
@@ -294,7 +297,7 @@ iframe {
 								<%=user.getEmail()%>
 							</div>
 							<div style="padding-top:20px;">
-								<button onclick="location.href='profile/mypage.jsp'" class="btn2" style="width:100px;font-weight:bold;">MyPage</button>
+								<button onclick="location.href='profile/mypage.jsp?otherID=<%=userID %>'" class="btn2" style="width:100px;font-weight:bold;">MyPage</button>
 								<button onclick="location.href='logoutGo'" class="btn2" style="width:100px;font-weight:bold;">로그아웃</button>
 							</div>
 
@@ -304,10 +307,9 @@ iframe {
 							}
 						%>
 					</div>
-					<div class="chart" style="">
+					<div class="chart">
 						<h3>실시간차트</h3>
-						
-						<div style="font-size: 1.15em;float:left;padding-left: 40px;text-align:left;padding-top:12px;">
+						<div style="font-size:1.15em;float:left;padding-left:40px;text-align:left;padding-top:12px;">
 							<%
 								BoardDAO db = new BoardDAO();
 								ArrayList<Board> list = db.getPop("all", 10);
@@ -324,6 +326,7 @@ iframe {
 				</div>
 
 			<div class="boardSet col-md-12">
+				<div class="row">
 			<div class="col-md-4">
 				<table class="table">
 					<thead>
@@ -402,7 +405,7 @@ iframe {
 				</table>
 			</div>
 			</div>
-
+		</div>
 			<div class="col-md-5">
 				<div class="sche">
 					<a href="schedule/schedule.jsp" style="font-size:1.8em;font-weight:bold;">Schedule &nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
@@ -462,10 +465,9 @@ iframe {
 				</div>
 			</div>
 			<div class="col-md-7">
-				<div class="list" style="width:100%;background:white;border-radius: 30px;margin-bottom:20px;margin-right:20px;padding-top: 10px;padding-bottom: 15px;padding-left:20px;">
+				<div class="list">
 					<a href="#" style="font-size:1.8em;font-weight: bold;">PlayList &nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
-					<hr align="center" style="border: dashed 1px rgb(174, 211, 229);margin:0 auto;width:95%;">
-					<div>준비중이에요</div>
+					<img alt="준비중이에요">
 				</div>
 			</div>
 		</div>

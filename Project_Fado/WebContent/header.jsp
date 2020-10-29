@@ -140,8 +140,8 @@ a:hover {text-decoration: none; }
 		<%
 			} else {
 		%>
-		<a class="above_menu" href="logoutGo">로그아웃</a> <a class="above_menu"
-			href="../profile/mypage.jsp">MyPage</a>
+		<a class="above_menu" href="../logoutGo">로그아웃</a>
+		<a class="above_menu"href="../profile/mypage.jsp">MyPage</a>
 		<%
 			}
 		%>
@@ -182,6 +182,7 @@ a:hover {text-decoration: none; }
 				<%
 			}
 		%>
+			<li><a href="../index.jsp">Home</a></li>
 				<li><a href="../board/board.jsp">Board</a>		
 			<li><a href="../schedule/schedule.jsp">Schedule</a></li>
 			<li><a href="#">PlayList</a></li>

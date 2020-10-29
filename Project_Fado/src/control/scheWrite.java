@@ -31,7 +31,7 @@ public class scheWrite extends HttpServlet {
 	private void actionDo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
 		PrintWriter script = response.getWriter();
 		
@@ -45,7 +45,9 @@ public class scheWrite extends HttpServlet {
 			userID = (String) session.getAttribute("id");//유저아이디에 해당 세션값을 넣어준다.
 		}
 		
+		
 		User user = userdb.info(userID);
+		
 		if (userID == null) {
 			System.out.print("로그인 안되어있음");
 			script.println("<script>");
@@ -53,15 +55,16 @@ public class scheWrite extends HttpServlet {
 			response.sendRedirect("../login/login.jsp");
 			script.println("</script>");
 		}
+		System.out.println("여기까지2");
+		
 		if(user.getPart().equals("busker")) {
-			
 			sche.setTitle(request.getParameter("title"));
 			sche.setWriter(userID);
-			if(request.getParameter("bukser")!="") {
+			if(!request.getParameter("busker").equals("")) {
 				sche.setBusker(request.getParameter("busker"));
 			}
 			else {
-				sche.setBusker(userID);
+				sche.setBusker(user.getName());
 			}
 			sche.setDate(request.getParameter("date"));
 			sche.setStart(request.getParameter("start"));
@@ -70,21 +73,22 @@ public class scheWrite extends HttpServlet {
 			sche.setDetail(request.getParameter("detail"));
 			sche.setExp(request.getParameter("exp"));
 			sche.setOpen(Integer.parseInt(request.getParameter("open")));
+			System.out.println(sche.getTitle() +","+sche.getWriter()+","+sche.getBusker()+","+sche.getDate()+","+sche.getStart()+","+sche.getEnd()+","+sche.getPlace()+","+sche.getDetail()+","+sche.getExp()+","+ sche.getOpen());
 			
 			
-			if(sche.getTitle()==""||sche.getDate()==""||sche.getStart()==""||sche.getEnd()==""||sche.getPlace()=="") {
+			if(sche.getTitle().equals("")||sche.getDate().equals("")||sche.getStart().equals("")||sche.getEnd().equals("")||sche.getPlace().equals("")) {
 				System.out.print("입력 안된 사항이 있음");
 				script.println("<script>");
 				script.println("alert('입력 안된 사항이 있습니다');");
-				script.println("location.href='history.back()';");
+				script.println("location.href='scheInsert.jsp'");
 				script.println("</script>");
 			} else {
 				int result = db.write(sche.getTitle(), sche.getWriter(), sche.getBusker(), sche.getDate(), sche.getStart(), sche.getEnd(), sche.getPlace(), sche.getDetail(), sche.getExp(), sche.getOpen());
-				
 				if (result == -1) {
 					System.out.print("일정작성 실패");
 				}else {
 					System.out.print("일정작성 성공");
+					response.sendRedirect("scheList.jsp");
 				}
 			}
 		}else {

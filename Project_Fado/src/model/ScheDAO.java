@@ -46,7 +46,8 @@ public class ScheDAO {
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
 			try {
 				
-				SQL = "SELECT * FROM `schedule` WHERE date=?";
+				SQL = "SELECT * FROM `schedule` WHERE date = ?";
+
 				pstmt = conn.prepareStatement(SQL);
 				pstmt.setString(1, date);
 				rs = pstmt.executeQuery();

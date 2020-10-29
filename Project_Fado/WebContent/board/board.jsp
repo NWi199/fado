@@ -39,34 +39,27 @@ background: rgb(52, 152, 219); font-size: 1.2em; font-weight: bold; border: 0; w
 }
 
 @media (min-width: 768px) {
-.tableSet{
-margin-left: 20px; margin-right: 20px; color: black;
-}
-.search {
-background: rgb(52, 152, 219); margin-top: 50px; margin-left: 20px; margin-right: 20px;margin-bottom:30px; border-radius: 30px;
-}
-
-.insearch{
-background: white; width: 90%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;
-}
+	.mo {display:none;}
+	.tableSet{
+	margin-left: 20px; margin-right: 20px; color: black;
+	}
+	.search {
+	background: rgb(52, 152, 219); margin-top: 50px; margin-left: 20px; margin-right: 20px;margin-bottom:30px; border-radius: 30px;
+	}
+	
+	.insearch{
+	background: white; width: 90%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;
+	}
+	.write{width:1050px;;height:40px;background:rgb(52, 152, 219);color:white;font-size:1.3em;font-weight:bold;border:0px;border-radius:10px;margin-left:20px;margin-bottom:30px;}
 }
 
 @media (min-width: 320px) and (max-width: 480px){ 
-.tableSet{
-color: black;
+	.pc {display:none;}
+	.tableSet{color: black;}
+	.search {background: rgb(52, 152, 219);width:100%; margin-top: 50px;margin-bottom:30px; border-radius: 30px;}
+	.insearch{background: white; width:70%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;}
+	.write{width:100%;height:40px;background:rgb(52, 152, 219);color:white;font-size:1.3em;font-weight:bold;border:0px;border-radius:10px;margin-bottom:30px;}
 }
-.search {
-background: rgb(52, 152, 219); margin-top: 50px;margin-bottom:30px; border-radius: 30px;
-}
-
-	.insearch{
-background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3em; margin-top: 10px; margin-bottom: 10px; border: 0; margin-left: 20px;
-}
-}
- #quick_bg {margin:0 auto;text-align:center;position:relative;}
- #quick {position:absolute;z-index:2;top:15px;width:153px;right:40px;}
- #container {position:relative;}
-
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
 	<%
@@ -74,13 +67,19 @@ background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3e
 		ArrayList<Board> list = null;
 	%>
 	<div class="content container-fluid" > 
-	<%
+		<div class="row">
+			<div class="col-md-12">
+				<form class="search" name="f" method="post" action="search_list.jsp">
+					<input class="insearch" type="text" name="word" placeholder="통합검색" value="<% if(request.getParameter("word") != null ) { %><%=request.getParameter("word")%><% }  %>">
+					<button class="form-control btn2" type="submit" style="border:0px;font-size:1.1em;">enter</button>
+					<input class="form-control" type="hidden" name="col" value="none">
+				</form>
+			</div>
+			<%
 				if (userID != null) {
 			%>
-				<div id="quick_bg">
-					<div id="quick">
-						<a href="write.jsp"><i class="fas fa-plus-circle fa-5x" style="color:rgb(255,200,155);"></i></a>
-					</div>
+				<div class="col-md-12">
+					<button type="button" class="write" onclick="location.href='write.jsp'">글쓰기</button>
 				</div>
 				<%
 				}else{
@@ -88,14 +87,6 @@ background: white; width:75%; height: 60px; border-radius: 30px; font-size: 1.3e
 				}
 			%>
 	
-		<div class="row">
-			<div class="col-md-12">
-				<div class="search">
-					<input class="insearch" type="text" placeholder="통합검색">
-					<button class="searchenter" type="submit">Enter</button>
-				</div>
-			</div>
-
 			<div class="tableSet">
 				<div class="col-md-4">
 					<table class="table">

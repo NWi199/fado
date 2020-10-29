@@ -56,7 +56,7 @@
 				
 				<div style="margin-bottom:10px;">
 					<div style="font-size:2em;font-weight:bold;width:100%;"><%=board.getTitle() %></div>
-					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><a href="../profile/mypage.jsp?otherID=<%= board.getUserID() %>"><%= board.getUserID() %></a> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
+					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><a href="../profile/mypage.jsp?otherID=<%= board.getUserName() %>"><%= board.getUserID() %></a> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
 				</div>
 				<div style="min-height:200px;margin-bottom:20px;padding:20px;font-size:1.1em;"><%= board.getContent() %></div>
 			</div>
@@ -77,8 +77,7 @@
 			<%
 				ArrayList<Comment> comlist = db.com_list(board.getIdx());
 				String name=null;
-				if(board.getCom_open()!=0){
-				if(comlist.size()!=0){
+				if((board.getCom_open()!=0)&&(comlist.size()!=0)){
 				for(int i=0; i<comlist.size(); i++){
 					if(board.getUserID().equals(comlist.get(i).getUser_id()))  name="작성자";
 					else name=comlist.get(i).getUser_name();
@@ -96,8 +95,6 @@
 			</div>
 			<%
 				}
-				}
-				
 				if(userID!=null){
 			%>
 			<div style="font-size:1.5em;font-weight:bold;margin-bottom:10px;margin-left:20px;">댓글 작성</div>

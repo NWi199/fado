@@ -7,6 +7,10 @@
 <%@ page import="model.UserDAO"%>
 <%@ page import="model.User"%>
 <%
+    // 인코딩
+    request.setCharacterEncoding("UTF-8");
+%>
+<%
 Schedule sche = new Schedule();
 ScheDAO db = new ScheDAO();
 String eDate = null;
@@ -83,19 +87,15 @@ th{text-align:center;}
 }
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
+
 	<div class="content">
 		<div class="board container-fluid">
 			<h1 style="text-align:center;font-size:3em;padding-bottom:20px;font-weight:bold;">공연 일정</h1>
-				<div class="place">
-					<i class="fas fa-map-marker-alt fa-2x" style="display:inline-block;color:white;padding-right:10px;"></i>
-					<select class="form-control" name="sido1" id="sido1" style="width:150px;display:inline-block;"></select>
-					<select class="form-control" name="gugun1" id="gugun1" style="width:120px;display:inline-block;"></select>
-				</div>
-
+				
 			<div style="background-color: white; margin-top: 20px;margin-bottom:20px">
 				<div style="padding-top: 20px;">
 					<a style="font-size: 3.5em; display: inline;color:black;" href="javascript:goMonth(<%=month-1%>);"><i class="fas fa-angle-left"></i></a>
-				<div style="font-size: 3.5em; display: inline;font-weight:bold;"><%=year%>. <%=month+1 %> 
+				<div style="fondt-size: 3.5em; display: inline;font-weight:bold;"><%=year%>. <%=month+1 %> 
 				</div>
 				<a style="font-size: 3.5em; display: inline;color:black;" href="javascript:goMonth(<%=month+1%>);"><i class="fas fa-angle-right "></i></a>
 				</div>

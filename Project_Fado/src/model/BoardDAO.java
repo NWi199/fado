@@ -32,8 +32,8 @@ public class BoardDAO {
 		}
 		return ""; //데이터베이스 오류
 	}
-	public int write(String title, String userID, String content, String type, int com_open) { 
-		String SQL = "INSERT INTO `board` VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public int write(String title, String userID, String userName, String content, String type, int com_open) { 
+		String SQL = "INSERT INTO `board` VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, 0);
@@ -41,11 +41,12 @@ public class BoardDAO {
 			pstmt.setString(3, content);
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, userID);
-			pstmt.setInt(6, 0);
-			pstmt.setString(7, type);
-			pstmt.setInt(8, 0);
-			pstmt.setInt(9, com_open);
-			pstmt.setString(10, getDate());
+			pstmt.setString(6, userName);
+			pstmt.setInt(7, 0);
+			pstmt.setString(8, type);
+			pstmt.setInt(9, 0);
+			pstmt.setInt(10, com_open);
+			pstmt.setString(11, getDate());
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,11 +67,12 @@ public class BoardDAO {
 				bbs.setContent(rs.getString(3));
 				bbs.setDate(rs.getString(4));
 				bbs.setUserID(rs.getString(5));
-				bbs.setHit(rs.getInt(6));
-				bbs.setType(rs.getString(7));
-				bbs.setComment(rs.getInt(8));
-				bbs.setCom_open(rs.getInt(9));
-				bbs.setModify(rs.getString(10));
+				bbs.setUserName(rs.getString(6));
+				bbs.setHit(rs.getInt(7));
+				bbs.setType(rs.getString(8));
+				bbs.setComment(rs.getInt(9));
+				bbs.setCom_open(rs.getInt(10));
+				bbs.setModify(rs.getString(11));
 				return bbs;
 			} 
 		}catch (Exception e) {
@@ -102,11 +104,12 @@ public class BoardDAO {
 					bbs.setContent(rs.getString(3));
 					bbs.setDate(rs.getString(4));
 					bbs.setUserID(rs.getString(5));
-					bbs.setHit(rs.getInt(6));
-					bbs.setType(rs.getString(7));
-					bbs.setComment(rs.getInt(8));
-					bbs.setCom_open(rs.getInt(9));
-					bbs.setModify(rs.getString(10));
+					bbs.setUserName(rs.getString(6));
+					bbs.setHit(rs.getInt(7));
+					bbs.setType(rs.getString(8));
+					bbs.setComment(rs.getInt(9));
+					bbs.setCom_open(rs.getInt(10));
+					bbs.setModify(rs.getString(11));
 					list.add(bbs);
 				}
 			} catch (Exception e) {
@@ -140,11 +143,12 @@ public class BoardDAO {
 					bbs.setContent(rs.getString(3));
 					bbs.setDate(rs.getString(4));
 					bbs.setUserID(rs.getString(5));
-					bbs.setHit(rs.getInt(6));
-					bbs.setType(rs.getString(7));
-					bbs.setComment(rs.getInt(8));
-					bbs.setCom_open(rs.getInt(9));
-					bbs.setModify(rs.getString(10));
+					bbs.setUserName(rs.getString(6));
+					bbs.setHit(rs.getInt(7));
+					bbs.setType(rs.getString(8));
+					bbs.setComment(rs.getInt(9));
+					bbs.setCom_open(rs.getInt(10));
+					bbs.setModify(rs.getString(11));
 					list.add(bbs);
 				}
 			} catch (Exception e) {
@@ -195,6 +199,64 @@ public class BoardDAO {
 		}
 		return -1;
 	}
+	
+	////////////// 검색 DAO ////////////////
+	public ArrayList<Board> search(String col, String word){ 
+		String SQL = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		
+		try {
+			if(col.equals("none")) {
+				SQL = "SELECT * FROM `board` WHERE title LIKE ? OR content LIKE ? OR userName LIKE ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, "%"+word+"%");
+				pstmt.setString(2, "%"+word+"%");
+				pstmt.setString(3, "%"+word+"%");
+			}else if(col.equals("title")) {
+				SQL = "SELECT * FROM `board` WHERE title LIKE ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, "%"+word+"%");
+			}else if(col.equals("content")) {
+				SQL = "SELECT * FROM `board` WHERE content LIKE ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, "%"+word+"%");
+			}else if(col.equals("both")) {
+				SQL = "SELECT * FROM `board` WHERE title LIKE ? OR content LIKE ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, "%"+word+"%");
+				pstmt.setString(2, "%"+word+"%");
+			}else if(col.equals("name")) {
+				SQL = "SELECT * FROM `board` WHERE userName LIKE ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, "%"+word+"%");
+			}else {
+				SQL = "SELECT * FROM `board`";
+				pstmt = conn.prepareStatement(SQL);
+			}
+			
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					Board bbs = new Board();
+					bbs.setIdx(rs.getInt(1));
+					bbs.setTitle(rs.getString(2));
+					bbs.setContent(rs.getString(3));
+					bbs.setDate(rs.getString(4));
+					bbs.setUserID(rs.getString(5));
+					bbs.setHit(rs.getInt(6));
+					bbs.setType(rs.getString(7));
+					bbs.setComment(rs.getInt(8));
+					bbs.setCom_open(rs.getInt(9));
+					bbs.setModify(rs.getString(10));
+					list.add(bbs);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return list; 
+	}
+	
+	////////////// 댓글 DAO ////////////////
 	public int com_count(int idx, int com) {
 		String SQL = "UPDATE `board` SET comment = ?+1 WHERE idx = ?";
 		try {

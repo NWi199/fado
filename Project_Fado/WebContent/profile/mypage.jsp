@@ -71,7 +71,7 @@
 									<tr>
 										<td><a href="#" class="btn2">게시글관리</a></td>
 									<tr>
-										<td><a href="#" class="btn2">정보수정</a></td>
+										<td><a href="../profile/userModify.jsp" class="btn2">정보수정</a></td>
 									</tr>
 								</tbody>
 							</table>

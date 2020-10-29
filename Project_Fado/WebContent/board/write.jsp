@@ -41,8 +41,10 @@
 	        			</tr>
 	        		</tbody>
 	        	</table>
+	        	<input type="hidden" name="name" id="name" value="<%=user.getName() %>">
 	        <button class="btn2" type="button" onclick="history.back();" style="float:right;display:inline;margin-left:10px;">취소</button>
 	        <button class="btn2" type="submit" style="float:right;display:inline;">작성</button>
+	        
 	        </form>
 	       
 	   </div>   
