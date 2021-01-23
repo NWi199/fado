@@ -92,12 +92,11 @@ th{text-align:center;}
 		<div class="board container-fluid">
 			<h1 style="text-align:center;font-size:3em;padding-bottom:20px;font-weight:bold;">공연 일정</h1>
 				
-			<div style="background-color: white; margin-top: 20px;margin-bottom:20px">
+			<div style="background-color: white; margin-top: 20px;margin-bottom:20px;">
 				<div style="padding-top: 20px;">
 					<a style="font-size: 3.5em; display: inline;color:black;" href="javascript:goMonth(<%=month-1%>);"><i class="fas fa-angle-left"></i></a>
-				<div style="fondt-size: 3.5em; display: inline;font-weight:bold;"><%=year%>. <%=month+1 %> 
-				</div>
-				<a style="font-size: 3.5em; display: inline;color:black;" href="javascript:goMonth(<%=month+1%>);"><i class="fas fa-angle-right "></i></a>
+					<div style="font-size: 3.5em; display: inline;font-weight:bold;"><%=year%>. <%=month+1 %> </div>
+					<a style="font-size: 3.5em; display: inline;color:black;" href="javascript:goMonth(<%=month+1%>);"><i class="fas fa-angle-right "></i></a>
 				</div>
 				<%
 					for (int i = 1; i < 32; i++) {

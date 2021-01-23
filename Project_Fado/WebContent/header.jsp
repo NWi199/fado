@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="shortcut icon" type="image⁄x-icon" href="../image/favicon.png">
 <script src="https://kit.fontawesome.com/64de5f242b.js" crossorigin="64de5f242b"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -19,6 +20,7 @@
 	});
 </script>
 <title>fado</title>
+
 </head>
 <style>
 a{
@@ -159,7 +161,7 @@ a:hover {text-decoration: none; }
 				<li style="margin-left: 30px;"><button class="btn"
 						onclick="location.href='#'">PlayList</button></li>
 				<li style="margin-left: 30px;"><button class="btn"
-						onclick="location.href='#'">Notice</button></li>
+						onclick="location.href='../notice/notice.jsp'">Notice</button></li>
 		</ul>
 	</div>
 </div>
@@ -186,7 +188,7 @@ a:hover {text-decoration: none; }
 				<li><a href="../board/board.jsp">Board</a>		
 			<li><a href="../schedule/schedule.jsp">Schedule</a></li>
 			<li><a href="#">PlayList</a></li>
-			<li><a href="#">Notice</a></li>
+			<li><a href="../notice/notice.jsp">Notice</a></li>
 			</ul>
 			</li>
 		</ul>

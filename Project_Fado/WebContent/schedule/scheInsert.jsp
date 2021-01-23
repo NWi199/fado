@@ -163,10 +163,7 @@
 						<td>공연설명</td>
 						<td colspan='2'><textarea name="exp" class="form-control" id="exp" style="width:100%;"></textarea></td>
 					</tr>
-					<tr>
-						<td>공개여부</td>
-						<td colspan='2'><label for="open"><input type="radio" name="open" id="name" value="1" checked> 공개<input type="radio" name="open" value="0"> 비공개</label></td>
-					</tr>
+					
 				</tbody>
 			</table>
 	    <div class="btnSet">

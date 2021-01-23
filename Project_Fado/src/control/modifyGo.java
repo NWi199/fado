@@ -31,21 +31,35 @@ public class modifyGo extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
+		String userID = null;
 		PrintWriter script = response.getWriter();
-
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("id") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
+			userID = (String) session.getAttribute("id");//유저아이디에 해당 세션값을 넣어준다.
+		}
+		
 		UserDAO db = new UserDAO();
 		
-		String pwe = request.getParameter("pw");
-		String id = request.getParameter("id");
-		int result = db.update(pw, id);
+		String pw = request.getParameter("pw");
+		String id = userID;
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		String sido = request.getParameter("sido1");
+		String gugun = request.getParameter("gugun");
+		String exp = request.getParameter("exp");
+		
+		
+		int result = db.update(id, pw, name, email, sido, gugun, exp);
 		
 		if(!pw.equals("") && !pw.equals(id)) {
 			if (result == -1) {
 				System.out.println("오류");
 			}else {
+				
 				script.println("<script>");
 				script.println("alert('로그인을 다시 해주세요')");
-				script.println("location.href='../login/login.jsp'");
+				script.println("location.href='../logoutGo'");
 				script.println("</script>");
 			}
 		}else {
@@ -54,6 +68,7 @@ public class modifyGo extends HttpServlet {
 			script.println("history.back()");
 			script.println("</script>");
 		}
+		
 	}
 
 }

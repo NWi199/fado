@@ -56,7 +56,7 @@
 				
 				<div style="margin-bottom:10px;">
 					<div style="font-size:2em;font-weight:bold;width:100%;"><%=board.getTitle() %></div>
-					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><a href="../profile/mypage.jsp?otherID=<%= board.getUserName() %>"><%= board.getUserID() %></a> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
+					<div class="dw" style="margin-bottom:10px;font-size:0.9em;width:100%;"><a href="../profile/mypage.jsp?otherID=<%= board.getUserID() %>"><%= board.getUserName() %></a> &nbsp; &nbsp; <%= board.getDate() %> &nbsp; 조회 : <%= board.getHit()+1 %> </div>
 				</div>
 				<div style="min-height:200px;margin-bottom:20px;padding:20px;font-size:1.1em;"><%= board.getContent() %></div>
 			</div>
@@ -77,13 +77,13 @@
 			<%
 				ArrayList<Comment> comlist = db.com_list(board.getIdx());
 				String name=null;
-				if((board.getCom_open()!=0)&&(comlist.size()!=0)){
+				if(board.getCom_open()!=0){
 				for(int i=0; i<comlist.size(); i++){
 					if(board.getUserID().equals(comlist.get(i).getUser_id()))  name="작성자";
 					else name=comlist.get(i).getUser_name();
 			%>
 			<div class="comment" style="background:white; text-align: left;padding:30px;border-radius:20px;margin-bottom:10px;">
-				<div style="margin-left:10px;font-size:1.2em;font-weight:bold;display:inline;"><%=name %>(<%=comlist.get(i).getUser_id() %>)</div>
+				<div style="margin-left:10px;font-size:1.2em;font-weight:bold;display:inline;"><a href="../profile/mypage.jsp?otherID=<%= comlist.get(i).getUser_id() %>"><%=name %></a>(<%=comlist.get(i).getUser_id() %>)</div>
 				<div style="margin-top:5px;float:right;display:inline;"> <%=comlist.get(i).getModifytime() %></div>
 				<div style="margin-top:5px;"><%=comlist.get(i).getComment() %></div>
 				<% if(userID.equals(comlist.get(i).getUser_id())){ %>

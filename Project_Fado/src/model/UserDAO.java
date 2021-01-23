@@ -135,10 +135,10 @@ public class UserDAO {
 			pstmt.setString(1, pw);
 			pstmt.setString(2, name);
 			pstmt.setString(3, email);
-			pstmt.setString(4, id);
-			pstmt.setString(5, sido);
-			pstmt.setString(6, gun);
-			pstmt.setString(7, exp);
+			pstmt.setString(4, sido);
+			pstmt.setString(5, gun);
+			pstmt.setString(6, exp);
+			pstmt.setString(7, id);
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -66,6 +66,9 @@
 			UserDAO db = new UserDAO();
 			String userID = (String) session.getAttribute("id");
 			User user = db.info(userID);
+			if(user.getExp()==null){
+				user.setExp("");
+			}
 		%>
 
 	<div class="content">
@@ -96,12 +99,11 @@
 								</tr>
 								<tr>
 									<td>이메일</td>
-									<td><input type="text" name="email" class="form-control"
-										style="display: inline;"></td>
+									<td><input type="text" name="email" class="form-control" value="<%=user.getEmail() %>"></td>
 								</tr>
 								<tr>
 									<td>닉네임</td>
-									<td><input type="text" name="name" class="form-control"></td>
+									<td><input type="text" name="name" class="form-control" value="<%=user.getName() %>"></td>
 								</tr>
 								<tr>
 									<td>활동지역</td>
@@ -111,11 +113,10 @@
 								</tr>
 								<tr>
 									<td>자기소개</td>
-									<td colspan="4"><textarea name="intro" class="form-control" style="height:100px;resize: vertical;"></textarea>
+									<td colspan="4"><textarea name="intro" class="form-control"  style="height:100px;resize: vertical;"><%=user.getExp() %> </textarea>
 								</tr>                     
 							</tbody>
 						</table>
-						<button type="button" class="btn2">중복확인</button>
 						<button type="submit" class="btn2" style="background:rgb(52, 152, 219);">완료</button>
 					</form>
 				</div>
@@ -186,44 +187,7 @@ $('document').ready(function() {
         function checkValue()
         {
         	var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        	//아이디 입력여부 검사
-            if (f.id.value == "") {
-                alert("아이디를 입력하지 않았습니다.")
-                f.id.focus();
-                return false;
-            }
-            //아이디 유효성 검사 (영문소문자, 숫자만 허용)
-           for (var i = 0; i < document.f.id.value.length; i++) {
-                ch = document.f.id.value.charAt(i)
-                if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')&&!(ch >= 'A' && ch <= 'Z')) {
-                    alert("아이디는 영문 대소문자, 숫자만 입력가능합니다.")
-                    document.f.id.focus();
-                    document.f.id.select();
-                    return false;
-                }
-            }
-            //아이디에 공백 사용하지 않기
-            if (document.f.id.value.indexOf(" ") >= 0) {
-                alert("아이디에 공백을 사용할 수 없습니다.")
-                document.f.id.focus();
-                document.f.id.select()
-                return false;
-            }
-            //아이디 길이 체크 (4~12자)
-           if (f.id.value.length<4 || f.id.value.length>12) {
-                alert("아이디를 4~12자까지 입력해주세요.")
-                f.id.focus();
-                f.id.select();
-                return false;
-            }
-            
-           if (!isNaN(f.id.value.substr(0,1)))
-           {
-                alert("아이디는 숫자로 시작할 수 없습니다.");
-                f.id.select();
-                return;
-           }
-  
+     
                //비밀번호 입력여부 체크
             if (f.pw.value == "") {
                 alert("비밀번호를 입력하지 않았습니다.")
@@ -249,7 +213,6 @@ $('document').ready(function() {
                 f.pw1.focus();
                 return false;
             }
-     
             if (f.email.value == "") {
                 alert("이메일을 입력하지 않았습니다.")
                 f.email.focus();
@@ -273,6 +236,7 @@ $('document').ready(function() {
                 f.name.focus();
                 return false;
             }
+            
           if(f.intro.length>100){
                 alert("자기소개는 100자 이내입니다.");
                 f.intro.focus();

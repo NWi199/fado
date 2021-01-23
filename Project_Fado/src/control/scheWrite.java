@@ -55,7 +55,6 @@ public class scheWrite extends HttpServlet {
 			response.sendRedirect("../login/login.jsp");
 			script.println("</script>");
 		}
-		System.out.println("여기까지2");
 		
 		if(user.getPart().equals("busker")) {
 			sche.setTitle(request.getParameter("title"));
@@ -72,9 +71,7 @@ public class scheWrite extends HttpServlet {
 			sche.setPlace(request.getParameter("place"));
 			sche.setDetail(request.getParameter("detail"));
 			sche.setExp(request.getParameter("exp"));
-			sche.setOpen(Integer.parseInt(request.getParameter("open")));
-			System.out.println(sche.getTitle() +","+sche.getWriter()+","+sche.getBusker()+","+sche.getDate()+","+sche.getStart()+","+sche.getEnd()+","+sche.getPlace()+","+sche.getDetail()+","+sche.getExp()+","+ sche.getOpen());
-			
+			sche.setOpen(0);
 			
 			if(sche.getTitle().equals("")||sche.getDate().equals("")||sche.getStart().equals("")||sche.getEnd().equals("")||sche.getPlace().equals("")) {
 				System.out.print("입력 안된 사항이 있음");

@@ -30,6 +30,8 @@ public class loginGo extends HttpServlet {
 	private void actionDo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		HttpSession session = request.getSession();
 		PrintWriter script = response.getWriter();
 		User user = new User();

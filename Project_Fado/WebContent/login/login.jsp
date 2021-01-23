@@ -48,14 +48,15 @@
 </style>
 <body oncontextmenu='return false' ondragstart='return false'>
 
+	
 	<div class="content">
 		<div class="login">
 			<div class="logo">
 				<a href="../index.jsp"><img src="../image/logo3.PNG" alt="fado"></a>
 			</div>
 			<div style="background:white;margin-top:50px;">
-				<form name="myForm" action="loginGo" method="post">
-					<table class="pc table">
+				<form class="pc" name="myForm" action="loginGo" method="post">
+					<table class="table">
 						<tbody style="margin:0 auto;">
 							<tr >
 								<td rowspan="2" style="width:200px;"><button type="submit" style="width:150px;height:120px;display: inline;background:gray;color:white;font-weight:bold;border-radius:10px;border:0px;font-size:1.3em;">로그인</button></td>
@@ -66,14 +67,18 @@
 							</tr>
 						</tbody>
 					</table>
-					
+					<button type="button" class="btn2" onclick="location.href='join.jsp'">회원가입</button>
+					<button type="button" class="btn2" style="margin-left:20px;">정보찾기</button>
+				</form>
+				<form class="mo" name="myForm" action="loginGo" method="post">
+	
 					<table class="mo table">
 						<tbody style="margin:0 auto;">
 							<tr>
-								<td><input style="height:40px;" type="text" name="id" placeholder="아이디" class="form-control"></td>
+								<td><input style="height:40px;" type="text" name="id" id="id" placeholder="아이디" class="form-control"></td>
 							</tr>
 							<tr>
-								<td><input style="height:40px;" type="password" name="pw" AUTOCOMPLETE="OFF" placeholder="비밀번호" class="form-control"></td>
+								<td><input style="height:40px;" type="password" name="pw" id="pw" AUTOCOMPLETE="OFF" placeholder="비밀번호" class="form-control"></td>
 							</tr>
 							<tr>
 								<td><button type="submit" class="btn2" style="width:100%;height:50px;background:gray;font-weight:bold;border-radius:10px;border:0px;font-size:1.3em;">로그인</button></td>

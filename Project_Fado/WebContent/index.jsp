@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+	content="width=device-width, initial-scale=1, user-scalable=yes" />
 <title>fado</title>
 <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
 <script src="https://kit.fontawesome.com/64de5f242b.js"
@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="shortcut icon" type="image⁄x-icon" href="image/favicon.png">
+
 </head>
 
 <style>
@@ -126,6 +128,7 @@ iframe {
 }
 
 .video {
+	
   width: 100%;
   background-color: #f0f0f0;
 }
@@ -134,7 +137,7 @@ iframe {
   position: relative;
   width: 100%;
   height: auto;
-  padding-top: 50%;
+  padding-top: 70%;
 }
 
 @media (min-width: 768px) {
@@ -150,7 +153,7 @@ iframe {
 		box-shadow: 5px 5px 15px 10px gray;
 	}
 
-	.play {width:100%;padding-bottom:20px;background:Black;margin-top:20px;margin-left:20px;margin-bottom:10px;}
+	.play {width:100%;height:530px;padding-bottom:20px;background:Black;margin-top:20px;margin-left:20px;margin-bottom:20px;}
 	.favorite {background: YELLOW;width:100%; height: 150px;margin-left:20px;margin-bottom:20px;}
 	.login {width: 90%;height: 170px;margin-top:20px;margin-left:10px;padding-top:20px;background:white;border-radius:30px;}
 	.chart {width:90%;height:345px;text-align:center;background:white;padding-top:10px;padding-bottom:15px;margin-top:20px;margin-left:10px;border-radius:30px;}
@@ -204,7 +207,7 @@ iframe {
 			} else {
 		%>
 		<a class="above_menu" href="logoutGo">로그아웃</a> <a class="above_menu"
-			href="profile/mypage.jsp">MyPage</a>
+			href="profile/mypage.jsp?otherID=<%=user.getId() %>">MyPage</a>
 		<%
 			}
 		%>
@@ -222,7 +225,7 @@ iframe {
 				<li style="margin-left: 30px;"><button class="btn"
 						onclick="location.href='#'">PlayList</button></li>
 				<li style="margin-left: 30px;"><button class="btn"
-						onclick="location.href='#'">Notice</button></li>
+						onclick="location.href='notice/notice.jsp'">Notice</button></li>
 		</ul>
 	</div>
 </div>
@@ -248,7 +251,7 @@ iframe {
 				<li><a href="board/board.jsp">Board</a>		
 			<li><a href="schedule/schedule.jsp">Schedule</a></li>
 			<li><a href="#">PlayList</a></li>
-			<li><a href="#">Notice</a></li>
+			<li><a href="notice/notice.jsp">Notice</a></li>
 			</ul>
 			</li>
 		</ul>
@@ -272,7 +275,6 @@ iframe {
 						      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/eitDnP0_83k?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						    </div>
 						</div>
-						<div class="favorite">좋아하는버스커</div>
 			</div>
 		
 
@@ -422,7 +424,7 @@ iframe {
 								// 현재 '일'을 취득
 								int day = currentCal.get(Calendar.DATE);
 									ScheDAO schedb = new ScheDAO();
-									String eDate = year+"-"+month+"-"+day;
+									String eDate = year+"-"+(month+1)+"-"+(day);
 									ArrayList<Schedule> slist = schedb.getList(eDate);
 									if(slist.size()>0){
 										for (int i = 0; i < slist.size(); i++) {
@@ -442,7 +444,7 @@ iframe {
 						<h2>Tomorrow</h2>
 							<ul>
 								<%
-									eDate = year+"-"+month+"-"+(day+1);
+									eDate = year+"-"+(month+1)+"-"+(day+1);
 									slist = schedb.getList(eDate);
 									if(slist.size()>0){
 										for (int i = 0; i < slist.size(); i++) {

@@ -110,7 +110,6 @@
 								</tr>                     
 							</tbody>
 						</table>
-						<button type="button" class="btn2">중복확인</button>
 						<button type="submit" class="btn2" style="background:rgb(52, 152, 219);">완료</button>
 					</form>
 				</div>
