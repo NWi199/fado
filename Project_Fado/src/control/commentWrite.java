@@ -10,60 +10,63 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ScheDAO;
-import model.Schedule;
+import model.Board;
+import model.BoardDAO;
+import model.Comment;
 
-@WebServlet("/schedule/scheDelete")
-public class scheDelete extends HttpServlet {
+@WebServlet("/board/commentWrite")
+public class commentWrite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		actionDo(request, response);
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		actionDo(request, response);
 	}
+	
 	private void actionDo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
 		
 		HttpSession session = request.getSession();
 		PrintWriter script = response.getWriter();
 		
 		String userID = null;
-		int idx = 0;
 		
-		Schedule sche = new Schedule();
-		ScheDAO db = new ScheDAO();
-		
+		Comment com = new Comment();
+		BoardDAO db = new BoardDAO();	
 		if (session.getAttribute("id") != null) {//유저아이디이름으로 세션이 존재하는 회원들은 
 			userID = (String) session.getAttribute("id");//유저아이디에 해당 세션값을 넣어준다.
 		}
-		if(request.getParameter("idx") != null){
-			idx = Integer.parseInt(request.getParameter("idx"));
-		}
-		if(idx == 0) {
+		
+		com.setComment(request.getParameter("comment"));
+		com.setBoard_id(Integer.parseInt(request.getParameter("boardIDX")));
+		com.setUser_id(request.getParameter("userID"));
+		com.setUser_name(request.getParameter("userName"));
+		Board board = db.getBD(com.getBoard_id());
+		if (userID == null) {
+			System.out.print("로그인 안되어있음");
 			script.println("<script>");
-			script.println("alert('유효하지 않은 글 입니다')");
-			script.println("location.href='scheList.jsp'");
+			script.println("alert('로그인을 하세요.')");
+			response.sendRedirect("../login/login.jsp");
 			script.println("</script>");
-		}
-		sche = db.getSche(idx);
-		if(!userID.equals(sche.getWriter())) {
-			script.println("<script>");
-			script.println("alert('권한이 없습니다')");
-			script.println("location.href='scheList.jsp'");
-			script.println("</script>");			
-		}else{
-				int result = db.delete(idx);
-				
-				if (result == -1) {
-					System.out.print("일정삭제 실패");
-				}else {
-					System.out.print("일정삭제 성공");
-					response.sendRedirect("scheList.jsp");
-				}
+		} else if(com.getComment()=="") {
+			System.out.print("입력 안된 사항이 있음");
+			
+		} else {
+			int result = db.com_write(com.getComment(), com.getBoard_id(), com.getUser_id(), com.getUser_name());
+			if (result == -1) {
+				System.out.print("댓글작성 실패");
+			}else {
+				System.out.print("댓글작성 성공");
+				db.com_count(com.getBoard_id(), board.getComment());
+				response.sendRedirect("view.jsp?idx="+com.getBoard_id());
 			}
+		}
 	}
+
 }
